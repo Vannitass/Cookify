@@ -1,5 +1,5 @@
 [versions]
-agp = "8.6.0"
+agp = "8.7.0"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
@@ -27,4 +27,3 @@ firebase-database-ktx = { group = "com.google.firebase", name = "firebase-databa
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-
