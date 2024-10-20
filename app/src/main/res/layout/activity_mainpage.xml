@@ -41,26 +41,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <Button
+        <ImageButton
             android:id="@+id/button1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="home"
-            android:layout_margin="16dp"/>
+            android:layout_width="50dp"
+            android:layout_height="53dp"
+            android:layout_margin="24dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:src="@drawable/ic_home"
+            android:text="home" />
 
-        <Button
+        <ImageButton
             android:id="@+id/button2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="chat"
-            android:layout_margin="16dp"/>
+            android:layout_margin="24dp"
+            android:src="@drawable/ic_chat"
+            android:background="?android:attr/selectableItemBackground"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/button3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="user"
-            android:layout_margin="16dp"/>
+            android:layout_margin="24dp"
+            android:src="@drawable/ic_profile"
+            android:background="?android:attr/selectableItemBackground"/>
 
     </LinearLayout>
 
