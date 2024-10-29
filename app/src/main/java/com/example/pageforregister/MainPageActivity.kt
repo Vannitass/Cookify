@@ -1,10 +1,10 @@
 package com.example.pageforregister
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.widget.EditText
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -15,6 +15,28 @@ class MainPageActivity : AppCompatActivity() {
 
         val itemsList: RecyclerView = findViewById(R.id.itemsList)
         val items = arrayListOf<Item>()
+        val imageButton1: ImageButton = findViewById(R.id.button1)
+        val imageButton2: ImageButton = findViewById(R.id.button2)
+        val imageButton3: ImageButton = findViewById(R.id.button3)
+        val search: EditText = findViewById(R.id.search)
+
+        imageButton1.setOnClickListener {
+            val intent = Intent(this, MainPageActivity::class.java)
+            startActivity(intent)
+        }
+
+        imageButton2.setOnClickListener {
+            val intent = Intent(this, Chat::class.java)
+            startActivity(intent)
+        }
+
+        imageButton3.setOnClickListener {
+            val intent = Intent(this, Profile::class.java)
+            startActivity(intent)
+        }
+
+        val answer_search = search.text.toString()
+
 
         items.add(Item(1, "souptomyam", "     Суп Том-Ям", "\n" +
                 "Варить этот тайский суп меня научила знакомая кореянка. " +
