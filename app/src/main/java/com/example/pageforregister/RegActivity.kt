@@ -7,6 +7,8 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.pageforregister.networkapi.RetrofitInstance
+import java.util.concurrent.Executors
 
 class RegActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +35,12 @@ class RegActivity : AppCompatActivity() {
             if(login == "" || email == "" || pass == "") //если одно из полей пустое
                 Toast.makeText(this, "Не все поля заполнены", Toast.LENGTH_LONG).show()
             else{   //регистрация пользователя
+
+
+                Executors.newSingleThreadExecutor().execute {
+                    val x = RetrofitInstance.api.greet(login + email + pass ).execute()
+                }
+
                 val user = User(login, email, pass) // создание объекта, который основан на классе User
 
                 val db = DbHelper(this, null)
