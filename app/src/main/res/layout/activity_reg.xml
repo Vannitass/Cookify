@@ -12,9 +12,10 @@
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="150dp"
+        android:baselineAligned="false"
         android:fontFamily="@font/inter_bold"
         android:text="Cookify"
         android:textColor="#000000"
@@ -25,12 +26,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="5dp"
         android:fontFamily="@font/inter"
         android:text="Register"
         android:textColor="#000000"
-        android:textSize="25sp"
-        android:textStyle="bold" />
+        android:textSize="23sp"
+        />
 
     <EditText
         android:id="@+id/user_email"
@@ -39,12 +39,14 @@
         android:ems="10"
         android:inputType="text"
         android:textColorHint="#6a6a6a"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="65dp"
         android:layout_gravity="center"
         android:textColor="#000000"
         android:background="@drawable/rounded_edit_text"
         android:hint="email"
-        android:paddingStart="16dp" />
+        android:paddingStart="16dp"
+        android:fontFamily="@font/inter"
+        />
 
     <EditText
         android:id="@+id/user_login"
@@ -53,30 +55,34 @@
         android:ems="10"
         android:inputType="textEmailAddress"
         android:textColorHint="#6a6a6a"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:layout_gravity="center"
         android:textColor="#000000"
         android:background="@drawable/rounded_edit_text"
         android:hint="username"
-        android:paddingStart="16dp" />
+        android:paddingStart="16dp"
+        android:fontFamily="@font/inter"
+        />
 
     <EditText
         android:id="@+id/user_pass"
         android:layout_width="330dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:background="@drawable/rounded_edit_text"
         android:ems="10"
         android:hint="password"
         android:paddingStart="16dp"
         android:inputType="textPassword"
         android:textColor="#000000"
-        android:textColorHint="#6a6a6a" />
+        android:textColorHint="#6a6a6a"
+        android:fontFamily="@font/inter"
+        />
 
     <Button
         android:id="@+id/button_reg"
-        android:layout_width="150dp"
+        android:layout_width="180dp"
         android:layout_height="60dp"
         android:text="Register"
         android:textStyle="bold"
@@ -92,10 +98,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="13dp"
         android:fontFamily="@font/inter"
         android:text="Log in"
-        android:textColor="#000000"
+        android:textColor="#757575"
         android:textSize="15sp" />
 
 </LinearLayout>
