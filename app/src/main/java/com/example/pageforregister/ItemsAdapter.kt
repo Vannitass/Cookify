@@ -1,12 +1,15 @@
 package com.example.pageforregister
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 
 class ItemsAdapter(var items: List<Item>, var context: Context) : RecyclerView.Adapter<ItemsAdapter.MyViewHolder>(){
 
@@ -36,5 +39,16 @@ class ItemsAdapter(var items: List<Item>, var context: Context) : RecyclerView.A
         )
 
         holder.image.setImageResource(imageId)
+
+        holder.itemView.setOnClickListener {
+            // Действие при нажатии на элемент, например, можно передать данные в новую активность
+            Toast.makeText(context, "Clicked: ${items[position].title}", Toast.LENGTH_SHORT).show()
+
+            // Переход на другую активность при нажатии на элемент
+            val intent = Intent(context, Card::class.java)
+            context.startActivity(intent)
+        }
     }
+
+
 }

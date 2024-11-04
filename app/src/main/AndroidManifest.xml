@@ -41,6 +41,10 @@
             android:name=".Profile"
             android:exported="true" />
 
+        <activity
+            android:name=".Card"
+            android:exported="true" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
