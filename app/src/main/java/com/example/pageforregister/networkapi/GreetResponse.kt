@@ -1,5 +1,6 @@
 package com.example.pageforregister.networkapi
 
 data class GreetResponse(
-    val message: String
+    val status: String?,
+    val message: String?
 )

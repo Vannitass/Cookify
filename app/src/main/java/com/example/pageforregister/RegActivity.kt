@@ -8,7 +8,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pageforregister.networkapi.RetrofitInstance
-import java.util.concurrent.Executors
+import android.util.Log
+import kotlinx.coroutines.*
+
 
 class RegActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,29 +30,48 @@ class RegActivity : AppCompatActivity() {
 
         //обработчик событий при нажатии на кнопку
         button.setOnClickListener {
-            val login = userLogin.text.toString().trim() //trim() удаляет все лишние пробелы
-            val email = userLogin.text.toString().trim()
-            val pass = userLogin.text.toString().trim()
+            val login = userLogin.text.toString().trim()
+            val email = userEmail.text.toString().trim()
+            val pass = userPass.text.toString().trim()
 
-            if(login == "" || email == "" || pass == "") //если одно из полей пустое
+            if (login.isEmpty() || email.isEmpty() || pass.isEmpty()) {
                 Toast.makeText(this, "Не все поля заполнены", Toast.LENGTH_LONG).show()
-            else{   //регистрация пользователя
+            } else {
+                // Запуск корутины для выполнения сетевого запроса в фоновом потоке
+                GlobalScope.launch(Dispatchers.IO) {
+                    try {
+                        val response = RetrofitInstance.api.greet("Registr", login, email, pass).execute()
 
+                        withContext(Dispatchers.Main) {
+                            if (response.isSuccessful) {
+                                val responseData = response.body()
 
-                Executors.newSingleThreadExecutor().execute {
-                    val x = RetrofitInstance.api.greet(login + email + pass ).execute()
+                                if (responseData?.status == "success") {
+                                Toast.makeText(this@RegActivity, "Пользователь $login добавлен", Toast.LENGTH_LONG).show()
+
+                                // Очистка полей ввода
+                                userLogin.text.clear()
+                                userEmail.text.clear()
+                                userPass.text.clear()
+
+                                }
+
+                            } else {
+                                Toast.makeText(this@RegActivity, "Ошибка регистрации. Попробуйте позже.", Toast.LENGTH_LONG).show()
+                            }
+                        }
+                    } catch (e: Exception) {
+                        Log.e("NetworkError", "Ошибка сети: ${e.message}")
+                        withContext(Dispatchers.Main) {
+                            Toast.makeText(this@RegActivity, "Ошибка сети. Проверьте подключение к интернету.", Toast.LENGTH_LONG).show()
+                        }
+                    }
                 }
 
-                val user = User(login, email, pass) // создание объекта, который основан на классе User
-
-                val db = DbHelper(this, null)
-                db.addUser(user)
-                Toast.makeText(this, "Пользователь $login добавлен", Toast.LENGTH_LONG).show()
-
-                userLogin.text.clear()
-                userEmail.text.clear()
-                userPass.text.clear()
+                // Логирование данных для отладки
+                Log.d("MyTag", "Login: $login, Email: $email, Password: $pass")
             }
         }
+
     }
 }

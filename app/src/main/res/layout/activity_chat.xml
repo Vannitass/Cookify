@@ -47,13 +47,6 @@
             android:padding="10dp"
             android:maxLines="3" />
 
-        <ImageButton
-            android:id="@+id/sendButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
 
-            android:background="?android:attr/selectableItemBackground"
-            android:contentDescription="Отправить сообщение"
-            android:padding="10dp" />
     </LinearLayout>
 </RelativeLayout>

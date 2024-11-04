@@ -9,9 +9,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pageforregister.networkapi.RetrofitInstance
-import java.util.concurrent.Executors
+import kotlinx.coroutines.*
 
 class AuthActivity : AppCompatActivity() {
+    @OptIn(DelicateCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
@@ -28,29 +29,47 @@ class AuthActivity : AppCompatActivity() {
 
         button.setOnClickListener {
             val login = userLogin.text.toString().trim() //trim() удаляет все лишние пробелы
-            val pass = userLogin.text.toString().trim()
+            val pass = userPass.text.toString().trim()
 
             if (login == "" || pass == "") //если одно из полей пустое
                 Toast.makeText(this, "Не все поля заполнены", Toast.LENGTH_LONG).show()
             else {   //регистрация пользователя
-                val db = DbHelper(this, null)
-                val isAuth = db.getUser(login, pass)
 
-                if (isAuth) {
-                    Executors.newSingleThreadExecutor().execute {
-                        val x = RetrofitInstance.api.greet("").execute()
+
+
+                GlobalScope.launch(Dispatchers.IO) {
+                    try {
+                        val response = RetrofitInstance.api.greet("Auth", login, "", pass).execute()
+
+                        withContext(Dispatchers.Main) {
+                            if (response.isSuccessful) {
+                                val responseData = response.body()
+
+                                if (responseData?.status == "success") {
+                                    Toast.makeText(this@AuthActivity, "Пользователь $login авторизован", Toast.LENGTH_LONG).show()
+                                    userLogin.text.clear()
+                                    userPass.text.clear()
+
+                                    // Переход на главную страницу при успешной авторизации
+                                    startActivity(Intent(this@AuthActivity, MainPageActivity::class.java))
+                                } else {
+                                    Toast.makeText(this@AuthActivity, "Пользователь $login не авторизован!", Toast.LENGTH_LONG).show()
+                                }
+                            } else {
+                                Log.e("Error", "Response failed: ${response.errorBody()?.string()}")
+                                Toast.makeText(this@AuthActivity, "Ошибка сервера. Попробуйте позже.", Toast.LENGTH_LONG).show()
+                            }
+                        }
+                    } catch (e: Exception) {
+                        Log.e("Exception", "Request error: ${e.message}")
+                        withContext(Dispatchers.Main) {
+                            Toast.makeText(this@AuthActivity, "Ошибка подключения. Проверьте интернет.", Toast.LENGTH_LONG).show()
+                        }
                     }
-                    Toast.makeText(this, "Пользователь $login авторизован", Toast.LENGTH_LONG)
-                        .show()
-                    userLogin.text.clear()
-                    userPass.text.clear()
+                }
 
-                    // переход на главную страничку при авторизации
-                    val intent = Intent(this, MainPageActivity::class.java)
-                    startActivity(intent)
-                } else
-                    Toast.makeText(this, "Пользователь $login не авторизован!", Toast.LENGTH_LONG)
-                        .show()
+
+
             }
         }
     }
