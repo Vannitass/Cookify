@@ -11,10 +11,9 @@ import android.widget.TextView
 class ItemsAdapter(var items: List<Item>, var context: Context) : RecyclerView.Adapter<ItemsAdapter.MyViewHolder>(){
 
     class MyViewHolder(view: View): RecyclerView.ViewHolder(view){
-        val image: ImageView = view.findViewById(R.id.item_list_image)
-        val title: TextView = view.findViewById(R.id.item_list_title)
-        val desc: TextView = view.findViewById(R.id.item_list_description)
-        val author: TextView = view.findViewById(R.id.item_list_author)
+        val image: ImageView = view.findViewById(R.id.imageView)
+        val title: TextView = view.findViewById(R.id.textView)
+        val author: TextView = view.findViewById(R.id.profileName)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -28,7 +27,6 @@ class ItemsAdapter(var items: List<Item>, var context: Context) : RecyclerView.A
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.title.text = items[position].title
-        holder.desc.text = items[position].desc
         holder.author.text = items[position].author
 
         val imageId = context.resources.getIdentifier(
