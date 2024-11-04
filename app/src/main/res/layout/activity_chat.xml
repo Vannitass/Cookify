@@ -47,6 +47,12 @@
             android:padding="10dp"
             android:maxLines="3" />
 
-
+        <ImageButton
+            android:id="@+id/button_up"
+            android:layout_width="40dp"
+            android:layout_height="53dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:src="@drawable/up_arrow_icon_icons"
+            android:text="home" />
     </LinearLayout>
 </RelativeLayout>
