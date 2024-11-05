@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF">
 
     <!-- Заголовок чата -->
+
     <TextView
         android:id="@+id/chatTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#6200EE"
+        android:background="#50C878"
         android:padding="16dp"
         android:text="Название чата"
         android:textColor="#FFFFFF"
@@ -17,35 +19,40 @@
         android:gravity="center" />
 
     <!-- Список сообщений -->
+
+    <!-- Поле для ввода и кнопка отправки -->
+
     <ListView
         android:id="@+id/messageListView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_below="@id/chatTitle"
+        android:layout_height="391dp"
         android:layout_above="@id/messageInputLayout"
+        android:layout_below="@id/chatTitle"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp"
         android:divider="@android:color/transparent"
         android:dividerHeight="8dp"
         android:padding="8dp" />
 
-    <!-- Поле для ввода и кнопка отправки -->
     <LinearLayout
         android:id="@+id/messageInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/button_layout"
+        android:layout_marginBottom="0dp"
+        android:background="#F0F0F0"
         android:orientation="horizontal"
-        android:padding="8dp"
-        android:background="#F0F0F0">
+        android:padding="8dp">
 
         <EditText
             android:id="@+id/messageEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Введите сообщение"
             android:background="@drawable/rounded_edit_text"
-            android:padding="10dp"
-            android:maxLines="3" />
+            android:hint="Введите сообщение"
+            android:maxLines="3"
+            android:padding="10dp" />
 
         <ImageButton
             android:id="@+id/button_up"
@@ -54,5 +61,46 @@
             android:background="?android:attr/selectableItemBackground"
             android:src="@drawable/up_arrow_icon_icons"
             android:text="home" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/button_layout"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="1dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageButton
+            android:id="@+id/button1"
+            android:layout_width="50dp"
+            android:layout_height="53dp"
+            android:layout_margin="24dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:src="@drawable/ic_home"
+            android:text="home" />
+
+        <ImageButton
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="24dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:src="@drawable/ic_chat"
+            android:text="chat" />
+
+        <ImageButton
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="24dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:src="@drawable/ic_profile"
+            android:text="user" />
+
     </LinearLayout>
 </RelativeLayout>

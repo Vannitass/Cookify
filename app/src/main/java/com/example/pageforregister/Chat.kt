@@ -1,4 +1,5 @@
 package com.example.pageforregister
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.EditText
@@ -10,6 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.jsoup.Jsoup
 
+
 class Chat : AppCompatActivity() {
 
     private lateinit var messageListView: ListView
@@ -18,9 +20,29 @@ class Chat : AppCompatActivity() {
     private lateinit var messageAdapter: ArrayAdapter<String>
     private val messages = mutableListOf<String>()
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
+
+        val imageButton1: ImageButton = findViewById(R.id.button1)
+        val imageButton2: ImageButton = findViewById(R.id.button2)
+        val imageButton3: ImageButton = findViewById(R.id.button3)
+
+        imageButton1.setOnClickListener {
+            val intent = Intent(this, MainPageActivity::class.java)
+            startActivity(intent)
+        }
+
+        imageButton2.setOnClickListener {
+            val intent = Intent(this, Chat::class.java)
+            startActivity(intent)
+        }
+
+        imageButton3.setOnClickListener {
+            val intent = Intent(this, Profile::class.java)
+            startActivity(intent)
+        }
 
         messageListView = findViewById(R.id.messageListView)
         messageEditText = findViewById(R.id.messageEditText)
@@ -41,6 +63,9 @@ class Chat : AppCompatActivity() {
 
             }
         }
+
+
+
     }
 
     // Метод для добавления сообщений в список

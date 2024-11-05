@@ -15,9 +15,11 @@ class MainPageActivity : AppCompatActivity() {
 
         val itemsList: RecyclerView = findViewById(R.id.itemsList)
         val items = arrayListOf<Item>()
+
         val imageButton1: ImageButton = findViewById(R.id.button1)
         val imageButton2: ImageButton = findViewById(R.id.button2)
         val imageButton3: ImageButton = findViewById(R.id.button3)
+
         val search: EditText = findViewById(R.id.search)
 
         imageButton1.setOnClickListener {
