@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Цвет статус-бара -->
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <!-- Настройка яркости значков статус-бара: true для тёмных значков -->
-        <item name="android:windowLightStatusBar">true</item>
-    </style>
-    <style name="AppThemeColor" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppThemeColor" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryDark">@color/white</item>
         <item name="colorAccent">@color/white</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@color/white</item>
     </style>
 </resources>
