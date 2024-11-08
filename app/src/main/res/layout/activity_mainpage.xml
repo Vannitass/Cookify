@@ -53,18 +53,21 @@
 
 
         <Button
+            android:id="@+id/button1"
             android:layout_width="45dp"
             android:layout_height="45dp">
 
         </Button>
 
         <Button
+            android:id="@+id/button2"
             android:layout_width="45dp"
             android:layout_height="45dp">
 
         </Button>
 
         <Button
+            android:id="@+id/button3"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:backgroundTint="#FFFFFF"
