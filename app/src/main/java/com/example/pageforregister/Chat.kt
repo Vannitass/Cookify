@@ -2,6 +2,7 @@ package com.example.pageforregister
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.ImageButton
@@ -68,7 +69,7 @@ class Chat : AppCompatActivity() {
             if (userMessage.isNotEmpty()) {
                 addMessage("Вы: $userMessage") // Добавляем сообщение пользователя
                 messageEditText.text.clear()
-                searchYandex(userMessage) // Запускаем поиск
+                searchGoogle(userMessage) // Запускаем поиск через Google
             }
         }
     }
@@ -80,10 +81,10 @@ class Chat : AppCompatActivity() {
         messageListView.setSelection(messages.size - 1)
     }
 
-    // Функция для выполнения запроса в Яндекс и парсинга ответа
-    private fun searchYandex(query: String) {
+    // Функция для выполнения запроса в Google и парсинга ответа
+    private fun searchGoogle(query: String) {
         // Кодирование запроса для корректной передачи в URL
-        val url = "https://yandex.ru/search/?text=${URLEncoder.encode(query, "UTF-8")}"
+        val url = "https://www.google.com/search?q=${URLEncoder.encode(query, "UTF-8")}"
 
         // Показываем индикатор загрузки и отключаем кнопку отправки
         loadingIndicator.visibility = ProgressBar.VISIBLE
@@ -102,20 +103,20 @@ class Chat : AppCompatActivity() {
                         val html = response.body?.string()
                         if (html != null) {
                             val doc: Document = Jsoup.parse(html)
-                            val smartAnswer = doc.selectFirst("div.OrganicTextContent")?.text()
-
+                            val smartAnswer = doc.selectFirst("div.BNeawe")?.text() // Новый CSS-селектор для Google
+                            Log.d("HTML_LOG", "HTML Content:\n${doc.html()}")
                             // Отображаем ответ или сообщение об ошибке
                             withContext(Dispatchers.Main) {
                                 if (smartAnswer != null) {
                                     addMessage("Ответ: $smartAnswer")
                                 } else {
-                                    addMessage("Бот: Не удалось найти интеллектуальный ответ.")
+                                    addMessage("Бот: Не удалось найти ответ.")
                                 }
                             }
                         }
                     } else {
                         withContext(Dispatchers.Main) {
-                            addMessage("Бот: Ошибка соединения с Яндексом.")
+                            addMessage("Бот: Ошибка соединения с Google.")
                         }
                     }
                 }
