@@ -39,8 +39,9 @@
             android:layout_gravity="top|end"
             android:hyphenationFrequency="full"
             android:padding="10dp"
-            android:text="Суп Рамэн Суп «Рамэн» — это одно из самых популярных блюд в Японии. Очень сытное блюдо. Готовят его практически на каждом шагу, вариаций супа великое множество, наверное, сколько поваров в Японии, столько и вариантов супов"
+            android:text="Суп «Рамэн» — это одно из самых популярных блюд в Японии. Очень сытное блюдо. Готовят его практически на каждом шагу, вариаций супа великое множество, наверное, сколько поваров в Японии, столько и вариантов супов"
             android:textColor="@android:color/white"
+            android:textSize="20sp"
             android:textStyle="bold"/>
     </androidx.cardview.widget.CardView>
 
@@ -72,6 +73,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Имя пользователя"
+                android:textColor="#000000"
+                android:paddingLeft="15dp"
                 android:layout_toEndOf="@id/profileImage"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="8dp"

@@ -10,9 +10,7 @@
         android:id="@+id/chatTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#50C878"
         android:padding="16dp"
-        android:text="Название чата"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         android:gravity="center" />
