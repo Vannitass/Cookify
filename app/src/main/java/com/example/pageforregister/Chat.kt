@@ -1,52 +1,62 @@
 package com.example.pageforregister
+
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ListView
+import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import okhttp3.OkHttpClient
+import okhttp3.Request
 import org.jsoup.Jsoup
-
+import org.jsoup.nodes.Document
+import java.net.URLEncoder
 
 class Chat : AppCompatActivity() {
 
     private lateinit var messageListView: ListView
     private lateinit var messageEditText: EditText
     private lateinit var sendButton: ImageButton
+    private lateinit var loadingIndicator: ProgressBar
     private lateinit var messageAdapter: ArrayAdapter<String>
     private val messages = mutableListOf<String>()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
 
+        // Инициализация кнопок навигации
         val imageButton1: ImageButton = findViewById(R.id.button1)
         val imageButton2: ImageButton = findViewById(R.id.button2)
         val imageButton3: ImageButton = findViewById(R.id.button3)
 
         imageButton1.setOnClickListener {
-            val intent = Intent(this, MainPageActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, MainPageActivity::class.java))
         }
 
         imageButton2.setOnClickListener {
-            val intent = Intent(this, Chat::class.java)
-            startActivity(intent)
+            // Избегаем перезапуска Chat, если он уже открыт
+            if (this !is Chat) {
+                startActivity(Intent(this, Chat::class.java))
+            }
         }
 
         imageButton3.setOnClickListener {
-            val intent = Intent(this, Profile::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, Profile::class.java))
         }
 
+        // Инициализация компонентов чата
         messageListView = findViewById(R.id.messageListView)
         messageEditText = findViewById(R.id.messageEditText)
         sendButton = findViewById(R.id.button_up)
+        loadingIndicator = findViewById(R.id.loadingIndicator) // Индикатор загрузки
 
         messageAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, messages)
         messageListView.adapter = messageAdapter
@@ -59,13 +69,9 @@ class Chat : AppCompatActivity() {
             if (userMessage.isNotEmpty()) {
                 addMessage("Вы: $userMessage") // Добавляем сообщение пользователя
                 messageEditText.text.clear()
-                fetchNews()
-
+                searchGoogle(userMessage) // Запускаем поиск через Google
             }
         }
-
-
-
     }
 
     // Метод для добавления сообщений в список
@@ -75,29 +81,55 @@ class Chat : AppCompatActivity() {
         messageListView.setSelection(messages.size - 1)
     }
 
-    // Функция для парсинга новостей
-    private fun fetchNews() {
+    // Функция для выполнения запроса в Google и парсинга ответа
+    private fun searchGoogle(query: String) {
+        // Кодирование запроса для корректной передачи в URL
+        val url = "https://www.google.com/search?q=${URLEncoder.encode(query, "UTF-8")}"
+
+        // Показываем индикатор загрузки и отключаем кнопку отправки
+        loadingIndicator.visibility = ProgressBar.VISIBLE
+        sendButton.isEnabled = false
+
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val url = "https://ya.ru/" // Укажите реальный URL
-                val document = Jsoup.connect(url).get()
-                val articles = document.select("article") // Настройте на реальную структуру сайта
+                val client = OkHttpClient()
+                val request = Request.Builder()
+                    .url(url)
+                    .header("User-Agent", "Mozilla/5.0")
+                    .build()
 
-                // Парсим новости
-                for (article in articles.take(3)) { // Ограничиваем количество статей
-                    val title = article.select("h2").text()
-                    val link = article.select("a").attr("href")
-
-                    // Добавляем результат на основной поток для UI
-                    CoroutineScope(Dispatchers.Main).launch {
-                        addMessage("Новость: $title\nСсылка: $link")
+                client.newCall(request).execute().use { response ->
+                    if (response.isSuccessful) {
+                        val html = response.body?.string()
+                        if (html != null) {
+                            val doc: Document = Jsoup.parse(html)
+                            val smartAnswer = doc.selectFirst("div.BNeawe")?.text() // Новый CSS-селектор для Google
+                            Log.d("HTML_LOG", "HTML Content:\n${doc.html()}")
+                            // Отображаем ответ или сообщение об ошибке
+                            withContext(Dispatchers.Main) {
+                                if (smartAnswer != null) {
+                                    addMessage("Ответ: $smartAnswer")
+                                } else {
+                                    addMessage("Бот: Не удалось найти ответ.")
+                                }
+                            }
+                        }
+                    } else {
+                        withContext(Dispatchers.Main) {
+                            addMessage("Бот: Ошибка соединения с Google.")
+                        }
                     }
                 }
-
             } catch (e: Exception) {
                 e.printStackTrace()
-                CoroutineScope(Dispatchers.Main).launch {
-                    addMessage("Бот: Не удалось загрузить новости.")
+                withContext(Dispatchers.Main) {
+                    addMessage("Бот: Произошла ошибка при попытке получить ответ.")
+                }
+            } finally {
+                // Скрываем индикатор загрузки и включаем кнопку отправки
+                withContext(Dispatchers.Main) {
+                    loadingIndicator.visibility = ProgressBar.GONE
+                    sendButton.isEnabled = true
                 }
             }
         }
