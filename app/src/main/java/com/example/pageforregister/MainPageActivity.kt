@@ -1,15 +1,18 @@
 package com.example.pageforregister
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatImageButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class MainPageActivity : AppCompatActivity() {
+    @SuppressLint("WrongViewCast")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mainpage)
@@ -17,9 +20,9 @@ class MainPageActivity : AppCompatActivity() {
         val itemsList: RecyclerView = findViewById(R.id.itemsList)
         val items = arrayListOf<Item>()
 
-        val imageButton1: Button = findViewById(R.id.button1)
-        val imageButton2: Button = findViewById(R.id.button2)
-        val imageButton3: Button = findViewById(R.id.button3)
+        val imageButton1 = findViewById<AppCompatImageButton>(R.id.button1)
+        val imageButton2 = findViewById<AppCompatImageButton>(R.id.button2)
+        val imageButton3 = findViewById<AppCompatImageButton>(R.id.button3)
 
         val search: EditText = findViewById(R.id.search)
 

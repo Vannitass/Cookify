@@ -6,7 +6,6 @@
     android:background="#FFFFFF">
 
     <!-- Заголовок чата -->
-
     <TextView
         android:id="@+id/chatTitle"
         android:layout_width="match_parent"
@@ -19,27 +18,22 @@
         android:gravity="center" />
 
     <!-- Список сообщений -->
-
-    <!-- Поле для ввода и кнопка отправки -->
-
     <ListView
         android:id="@+id/messageListView"
         android:layout_width="match_parent"
         android:layout_height="391dp"
         android:layout_above="@id/messageInputLayout"
         android:layout_below="@id/chatTitle"
-        android:layout_marginTop="0dp"
-        android:layout_marginBottom="0dp"
         android:divider="@android:color/transparent"
         android:dividerHeight="8dp"
         android:padding="8dp" />
 
+    <!-- Поле для ввода и кнопка отправки -->
     <LinearLayout
         android:id="@+id/messageInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/button_layout"
-        android:layout_marginBottom="0dp"
         android:background="#F0F0F0"
         android:orientation="horizontal"
         android:padding="8dp">
@@ -59,10 +53,10 @@
             android:layout_width="44dp"
             android:layout_height="44dp"
             android:background="?android:attr/selectableItemBackground"
-            android:src="@drawable/up_arrow_icon_icons"
-            android:text="home" />
+            android:src="@drawable/up_arrow_icon_icons" />
     </LinearLayout>
 
+    <!-- Нижняя панель кнопок -->
     <LinearLayout
         android:id="@+id/button_layout"
         android:layout_width="match_parent"
@@ -103,4 +97,13 @@
             android:text="user" />
 
     </LinearLayout>
+
+    <!-- Индикатор загрузки -->
+    <ProgressBar
+        android:id="@+id/loadingIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" /> <!-- Индикатор по умолчанию скрыт -->
+
 </RelativeLayout>
