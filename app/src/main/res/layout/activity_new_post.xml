@@ -18,12 +18,19 @@
             android:orientation="vertical">
 
 
+            <Button
+                android:id="@+id/backButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#50C878"
+                android:onClick="onBackPressed"
+                android:text="Назад" />
+
             <ImageView
                 android:id="@+id/image_preview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/soupramen"
-                />
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                app:srcCompat="@drawable/soupramen" />
 
             <Button
                 android:id="@+id/btn_choose_photo"

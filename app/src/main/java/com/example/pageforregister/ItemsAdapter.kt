@@ -18,11 +18,11 @@ class ItemsAdapter(var items: List<Item>, var context: Context) : RecyclerView.A
         val image: ImageView = view.findViewById(R.id.imageView)
         val title: TextView = view.findViewById(R.id.dish_name)
         val author: TextView = view.findViewById(R.id.profileName)
-        val description: TextView = view.findViewById(R.id.dish_description) // Добавьте это поле в XML
+        //val description: TextView = view.findViewById(R.id.itemsList) // Добавьте это поле в XML
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_in_list, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.card, parent, false)
         return MyViewHolder(view)
     }
 
@@ -33,7 +33,7 @@ class ItemsAdapter(var items: List<Item>, var context: Context) : RecyclerView.A
 
         holder.title.text = item.title
         holder.author.text = item.author
-        holder.description.text = item.description
+        //holder.description.text = item.description
 
         // Загрузка изображения с использованием Glide
         Glide.with(context)
