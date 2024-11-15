@@ -9,14 +9,16 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import com.bumptech.glide.Glide
 
 
 class ItemsAdapter(var items: List<Item>, var context: Context) : RecyclerView.Adapter<ItemsAdapter.MyViewHolder>(){
 
     class MyViewHolder(view: View): RecyclerView.ViewHolder(view){
         val image: ImageView = view.findViewById(R.id.imageView)
-        val title: TextView = view.findViewById(R.id.textView)
+        val title: TextView = view.findViewById(R.id.dish_name)
         val author: TextView = view.findViewById(R.id.profileName)
+        val description: TextView = view.findViewById(R.id.dish_description) // Добавьте это поле в XML
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -24,31 +26,33 @@ class ItemsAdapter(var items: List<Item>, var context: Context) : RecyclerView.A
         return MyViewHolder(view)
     }
 
-    override fun getItemCount(): Int {
-        return items.count()
-    }
+    override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.title.text = items[position].title
-        holder.author.text = items[position].author
+        val item = items[position]
 
-        val imageId = context.resources.getIdentifier(
-            items[position].image,
-            "drawable",
-            context.packageName
-        )
+        holder.title.text = item.title
+        holder.author.text = item.author
+        holder.description.text = item.description
 
-        holder.image.setImageResource(imageId)
+        // Загрузка изображения с использованием Glide
+        Glide.with(context)
+            .load(item.image)
+            .centerCrop()
+            .into(holder.image)
 
         holder.itemView.setOnClickListener {
-            // Действие при нажатии на элемент, например, можно передать данные в новую активность
-            Toast.makeText(context, "Clicked: ${items[position].title}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Clicked: ${item.title}", Toast.LENGTH_SHORT).show()
 
-            // Переход на другую активность при нажатии на элемент
-            val intent = Intent(context, Card::class.java)
+            // Переход на экран с детальным описанием рецепта
+            val intent = Intent(context, Card::class.java).apply {
+                putExtra("itemId", item.id)  // Передаем идентификатор элемента
+            }
             context.startActivity(intent)
         }
     }
+
+
 
 
 }

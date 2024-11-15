@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
 //для корректного обрабатывания пустое значения factory в методе стоит знак ?
-class DbHelper(val context: Context, val factory: SQLiteDatabase.CursorFactory?) :
+abstract class DbHelper(val context: Context, val factory: SQLiteDatabase.CursorFactory?) :
     SQLiteOpenHelper(context, "app", factory, 1){
 
     override fun onCreate(db: SQLiteDatabase?) { // создание базы данных
@@ -36,6 +36,22 @@ class DbHelper(val context: Context, val factory: SQLiteDatabase.CursorFactory?)
 
         val result = db.rawQuery("SELECT * FROM users WHERE login = '$login' AND pass = '$pass'", null)
         return result.moveToFirst()
+    }
+
+    fun getAllPosts(): List<Item> {
+        val posts = mutableListOf<Item>()
+        val db = readableDatabase
+        val cursor = db.query("dish_posts", null, null, null, null, null, null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                // Извлекаем данные из курсора и добавляем в список posts
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        db.close()
+        return posts
     }
 
 }

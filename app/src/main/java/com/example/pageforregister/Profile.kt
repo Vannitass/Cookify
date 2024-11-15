@@ -4,6 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
+import android.content.SharedPreferences
+import android.widget.Button
+import android.widget.TextView
+import com.example.pageforregister.MainPageActivity.Companion.NEW_POST_REQUEST_CODE
 
 
 class Profile : AppCompatActivity() {
@@ -28,6 +32,20 @@ class Profile : AppCompatActivity() {
         imageButton3.setOnClickListener {
             val intent = Intent(this, Profile::class.java)
             startActivity(intent)
+        }
+
+        // Получаем доступ к SharedPreferences
+        val sharedPreferences: SharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
+        val userLogin = sharedPreferences.getString("user_login", "Гость")
+
+        // Находим TextView и устанавливаем текст с логином пользователя
+        val userLoginTextView: TextView = findViewById(R.id.username)
+        userLoginTextView.text = "$userLogin"
+
+        val addRecipeButton: Button = findViewById(R.id.publishButton)
+        addRecipeButton.setOnClickListener {
+            val intent = Intent(this, NewPostActivity::class.java)
+            startActivityForResult(intent, NEW_POST_REQUEST_CODE)
         }
 
     }
