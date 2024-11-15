@@ -1,11 +1,49 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:padding="16dp">
 
     <!-- Закруглённое изображение с CardView -->
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/cardView"
+        tools:layout_editor_absoluteX="16dp">
+
+        <!-- Иконка с именем профиля -->
+        <RelativeLayout
+            android:id="@+id/profileLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/profileImage"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_profile" />
+
+            <TextView
+                android:id="@+id/profileName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:layout_toEndOf="@id/profileImage"
+                android:text="Имя пользователя" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="0dp"
@@ -28,7 +66,7 @@
 
             <!-- Текст поверх изображения -->
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/dish_name"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top|end"
@@ -36,41 +74,57 @@
                 android:padding="10dp"
                 android:text="Ваш текст здесь"
                 android:textColor="@android:color/white" />
-        </FrameLayout>
-    </androidx.cardview.widget.CardView>
-
-    <!-- LinearLayout для кнопки и профиля -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/cardView">
-
-        <!-- Иконка с именем профиля -->
-        <RelativeLayout
-            android:id="@+id/profileLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
 
             <ImageView
-                android:id="@+id/profileImage"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/ic_profile"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true" />
+                android:id="@+id/dish_image"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                tools:layout_editor_absoluteX="18dp"
+                tools:layout_editor_absoluteY="311dp" />
 
-            <TextView
-                android:id="@+id/profileName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Имя пользователя"
-                android:layout_toEndOf="@id/profileImage"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="8dp" />
-        </RelativeLayout>
 
+        </FrameLayout>
+
+        <!-- item_dish_post.xml -->
+
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:layout_width="380dp"
+        android:layout_height="381dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+
+        <TextView
+            android:id="@+id/dish_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Описание"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/dish_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Время приготовления"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/dish_servings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Порций"
+            android:textSize="14sp"
+            tools:layout_editor_absoluteX="19dp"
+            tools:layout_editor_absoluteY="681dp" />
     </LinearLayout>
+
+    <!-- LinearLayout для кнопки и профиля -->
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

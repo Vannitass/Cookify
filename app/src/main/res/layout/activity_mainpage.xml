@@ -70,7 +70,9 @@
             android:text="user"
             android:layout_margin="24dp"
             android:src="@drawable/ic_profile"
-            android:background="?android:attr/selectableItemBackground"/>
+            android:background="?android:attr/selectableItemBackground"
+            />
+
 
     </LinearLayout>
 

@@ -1,5 +1,6 @@
 package com.example.pageforregister
 
+import NotificationHelper
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -12,9 +13,24 @@ import com.example.pageforregister.networkapi.RetrofitInstance
 import kotlinx.coroutines.*
 
 class AuthActivity : AppCompatActivity() {
+    companion object {
+        const val REQUEST_CODE_POST_NOTIFICATIONS = 1
+    }
+    private lateinit var notificationHelper: NotificationHelper
+
+
     @OptIn(DelicateCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_auth)
+
+        notificationHelper = NotificationHelper(this)
+
+        // Пример успешной авторизации
+        if (userIsAuthenticated()) {
+            notificationHelper.showNotification("Welcome", "You have successfully logged in!")
+        }
+
         setContentView(R.layout.activity_auth)
 
         val userLogin: EditText = findViewById(R.id.user_login_auth)
@@ -50,6 +66,12 @@ class AuthActivity : AppCompatActivity() {
                                     userLogin.text.clear()
                                     userPass.text.clear()
 
+                                    // Сохраняем логин пользователя в SharedPreferences
+                                    val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
+                                    sharedPreferences.edit()
+                                        .putString("user_login", login)
+                                        .apply()
+
                                     // Переход на главную страницу при успешной авторизации
                                     startActivity(Intent(this@AuthActivity, MainPageActivity::class.java))
                                 } else {
@@ -72,5 +94,10 @@ class AuthActivity : AppCompatActivity() {
 
             }
         }
+    }
+
+    private fun userIsAuthenticated(): Boolean {
+        // Здесь логика для проверки авторизации пользователя
+        return true // Пока что возвращаем "true" для примера
     }
 }

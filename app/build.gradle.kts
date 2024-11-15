@@ -1,6 +1,8 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
+    id("org.jetbrains.kotlin.kapt")
+    id("org.jetbrains.kotlin.plugin.parcelize")
 }
 
 android {
@@ -32,11 +34,13 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+
     }
     buildFeatures {
         buildConfig = true
     }
 }
+
 
 dependencies {
 
@@ -58,4 +62,16 @@ dependencies {
     implementation(libs.jsoup)
 
 
+    implementation("androidx.core:core-ktx:1.3.2")
+    implementation("androidx.appcompat:appcompat:1.2.0")
+    implementation("com.google.android.material:material:1.2.1")
+    implementation("androidx.constraintlayout:constraintlayout:2.0.4")
+
+    implementation("com.github.bumptech.glide:glide:4.12.0")
+
+    //kapt("com.github.bumptech.glide:compiler:4.12.0")
 }
+
+//kapt {
+//    correctErrorTypes = true
+//}
