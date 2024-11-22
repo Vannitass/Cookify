@@ -11,7 +11,19 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.pageforregister.networkapi.RetrofitInstance
 import kotlinx.coroutines.*
 
+/**
+ * Activity для авторизации пользователей.
+ *
+ * Эта активность предоставляет интерфейс для ввода логина и пароля,
+ * а также отправки этих данных на сервер для авторизации.
+ */
 class AuthActivity : AppCompatActivity() {
+
+    /**
+     * Метод, вызываемый при создании активности.
+     *
+     * @param savedInstanceState Сохраненное состояние активности (если доступно).
+     */
     @OptIn(DelicateCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
