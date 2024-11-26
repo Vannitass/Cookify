@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("org.jetbrains.dokka") version "1.9.0"
+
 }
 
 android {
@@ -31,7 +33,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
     buildFeatures {
         buildConfig = true
@@ -56,6 +58,8 @@ dependencies {
     implementation(libs.logging.interceptor)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.jsoup)
+    implementation (libs.androidx.lifecycle.viewmodel.ktx) // Для ViewModel
+    implementation (libs.androidx.lifecycle.livedata.ktx) // Для LiveData
 
 
 

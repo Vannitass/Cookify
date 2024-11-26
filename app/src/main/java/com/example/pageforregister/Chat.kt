@@ -19,6 +19,11 @@ import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import java.net.URLEncoder
 
+/**
+ * Activity, предоставляющая функционал чата с ботом.
+ *
+ * Бот отправляет запросы в Google, парсит ответы и отображает их в интерфейсе.
+ */
 class Chat : AppCompatActivity() {
 
     private lateinit var messageListView: ListView
@@ -28,26 +33,33 @@ class Chat : AppCompatActivity() {
     private lateinit var messageAdapter: ArrayAdapter<String>
     private val messages = mutableListOf<String>()
 
+    /**
+     * Метод, вызываемый при создании активности.
+     *
+     * @param savedInstanceState Сохраненное состояние активности (если доступно).
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
 
-        // Инициализация кнопок навигации
+        // Инициализация кнопок навигации между экранами
         val imageButton1: ImageButton = findViewById(R.id.button1)
         val imageButton2: ImageButton = findViewById(R.id.button2)
         val imageButton3: ImageButton = findViewById(R.id.button3)
 
+        // Переход на главную страницу
         imageButton1.setOnClickListener {
             startActivity(Intent(this, MainPageActivity::class.java))
         }
 
+        // Остаемся в чате, если он уже открыт
         imageButton2.setOnClickListener {
-            // Избегаем перезапуска Chat, если он уже открыт
             if (this !is Chat) {
                 startActivity(Intent(this, Chat::class.java))
             }
         }
 
+        // Переход на страницу профиля
         imageButton3.setOnClickListener {
             startActivity(Intent(this, Profile::class.java))
         }
@@ -56,7 +68,7 @@ class Chat : AppCompatActivity() {
         messageListView = findViewById(R.id.messageListView)
         messageEditText = findViewById(R.id.messageEditText)
         sendButton = findViewById(R.id.button_up)
-        loadingIndicator = findViewById(R.id.loadingIndicator) // Индикатор загрузки
+        loadingIndicator = findViewById(R.id.loadingIndicator)
 
         messageAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, messages)
         messageListView.adapter = messageAdapter
@@ -64,29 +76,37 @@ class Chat : AppCompatActivity() {
         // Приветственное сообщение
         addMessage("Привет! Введите запрос")
 
+        // Обработка нажатия кнопки "Отправить"
         sendButton.setOnClickListener {
             val userMessage = messageEditText.text.toString().trim()
             if (userMessage.isNotEmpty()) {
-                addMessage("Вы: $userMessage") // Добавляем сообщение пользователя
+                addMessage("Вы: $userMessage")
                 messageEditText.text.clear()
-                searchGoogle(userMessage) // Запускаем поиск через Google
+                searchGoogle(userMessage)
             }
         }
     }
 
-    // Метод для добавления сообщений в список
+    /**
+     * Метод для добавления сообщений в чат.
+     *
+     * @param message Текст сообщения.
+     */
     private fun addMessage(message: String) {
         messages.add(message)
         messageAdapter.notifyDataSetChanged()
         messageListView.setSelection(messages.size - 1)
     }
 
-    // Функция для выполнения запроса в Google и парсинга ответа
+    /**
+     * Метод для выполнения поиска в Google и парсинга результатов.
+     *
+     * @param query Запрос, введенный пользователем.
+     */
     private fun searchGoogle(query: String) {
-        // Кодирование запроса для корректной передачи в URL
         val url = "https://www.google.com/search?q=${URLEncoder.encode(query, "UTF-8")}"
 
-        // Показываем индикатор загрузки и отключаем кнопку отправки
+        // Показать индикатор загрузки
         loadingIndicator.visibility = ProgressBar.VISIBLE
         sendButton.isEnabled = false
 
@@ -103,9 +123,9 @@ class Chat : AppCompatActivity() {
                         val html = response.body?.string()
                         if (html != null) {
                             val doc: Document = Jsoup.parse(html)
-                            val smartAnswer = doc.selectFirst("div.BNeawe")?.text() // Новый CSS-селектор для Google
+                            val smartAnswer = doc.selectFirst("div.BNeawe")?.text()
                             Log.d("HTML_LOG", "HTML Content:\n${doc.html()}")
-                            // Отображаем ответ или сообщение об ошибке
+
                             withContext(Dispatchers.Main) {
                                 if (smartAnswer != null) {
                                     addMessage("Ответ: $smartAnswer")
@@ -121,12 +141,12 @@ class Chat : AppCompatActivity() {
                     }
                 }
             } catch (e: Exception) {
-                e.printStackTrace()
+                Log.e("NetworkError", "Ошибка сети: ${e.message}")
                 withContext(Dispatchers.Main) {
                     addMessage("Бот: Произошла ошибка при попытке получить ответ.")
                 }
             } finally {
-                // Скрываем индикатор загрузки и включаем кнопку отправки
+                // Скрыть индикатор загрузки
                 withContext(Dispatchers.Main) {
                     loadingIndicator.visibility = ProgressBar.GONE
                     sendButton.isEnabled = true

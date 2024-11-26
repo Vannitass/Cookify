@@ -11,8 +11,19 @@ import com.example.pageforregister.networkapi.RetrofitInstance
 import android.util.Log
 import kotlinx.coroutines.*
 
-
+/**
+ * Activity для регистрации пользователей.
+ *
+ * Эта активность предоставляет интерфейс для ввода логина, email и пароля,
+ * а также отправляет эти данные на сервер для регистрации.
+ */
 class RegActivity : AppCompatActivity() {
+
+    /**
+     * Метод, вызываемый при создании активности.
+     *
+     * @param savedInstanceState Сохраненное состояние активности (если доступно).
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reg)

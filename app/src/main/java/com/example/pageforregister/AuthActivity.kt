@@ -10,12 +10,26 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pageforregister.networkapi.RetrofitInstance
 import kotlinx.coroutines.*
+import androidx.lifecycle.ViewModelProvider
 
+/**
+ * Activity для авторизации пользователей.
+ *
+ * Эта активность предоставляет интерфейс для ввода логина и пароля,
+ * а также отправки этих данных на сервер для авторизации.
+ */
 class AuthActivity : AppCompatActivity() {
+
+    /**
+     * Метод, вызываемый при создании активности.
+     *
+     * @param savedInstanceState Сохраненное состояние активности (если доступно).
+     */
     @OptIn(DelicateCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
+
 
         val userLogin: EditText = findViewById(R.id.user_login_auth)
         val userPass: EditText = findViewById(R.id.user_pass_auth)
@@ -47,8 +61,16 @@ class AuthActivity : AppCompatActivity() {
 
                                 if (responseData?.status == "success") {
                                     Toast.makeText(this@AuthActivity, "Пользователь $login авторизован", Toast.LENGTH_LONG).show()
+
+                                    val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
+                                    val editor = sharedPreferences.edit()
+                                    editor.putString("username", login)
+                                    editor.apply()
+                                    Log.d("AuthActivity", "User name saved: $login")
+
                                     userLogin.text.clear()
                                     userPass.text.clear()
+
 
                                     // Переход на главную страницу при успешной авторизации
                                     startActivity(Intent(this@AuthActivity, MainPageActivity::class.java))

@@ -1,86 +1,94 @@
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp">
+    android:layout_margin="8dp"
+    card_view:cardCornerRadius="16dp"
+    card_view:cardElevation="8dp"
+    android:backgroundTint="@color/white">
 
-    <!-- Закруглённое изображение с CardView -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
-        android:layout_width="match_parent"
-        android:layout_height="344dp"
-        app:cardCornerRadius="20dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:foreground="#50000000"
-            >
-
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/tom" />
-
-            <!-- Текст поверх изображения -->
-
-        </FrameLayout>
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="200dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="top|end"
-            android:hyphenationFrequency="full"
-            android:padding="10dp"
-            android:text="Суп «Рамэн» — это одно из самых популярных блюд в Японии. Очень сытное блюдо. Готовят его практически на каждом шагу, вариаций супа великое множество, наверное, сколько поваров в Японии, столько и вариантов супов"
-            android:textColor="@android:color/white"
-            android:textSize="20sp"
-            android:textStyle="bold"/>
-    </androidx.cardview.widget.CardView>
-
-    <!-- LinearLayout для кнопки и профиля -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/cardView">
+        android:padding="16dp">
 
-        <!-- Иконка с именем профиля -->
-        <RelativeLayout
-            android:id="@+id/profileLayout"
-            android:layout_width="wrap_content"
+        <!-- Изображение -->
+        <ImageView
+            android:id="@+id/cardImage"
+            android:layout_width="120dp"
+            android:layout_height="96dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/image_background"
+            android:scaleType="centerCrop"
+            android:src="@drawable/tomyam" />
+
+        <!-- Контент карточки -->
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <ImageView
-                android:id="@+id/profileImage"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/ic_profile"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true" />
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/profileName"
+                android:id="@+id/cardTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Имя пользователя"
-                android:textColor="#000000"
-                android:paddingLeft="15dp"
-                android:layout_toEndOf="@id/profileImage"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="8dp"
-                android:textStyle="bold"
-                />
-        </RelativeLayout>
+                android:text="Rinjani Mountain"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textColor="@color/black"
+                android:fontFamily="sans-serif-medium" />
 
+            <TextView
+                android:id="@+id/cardLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📍 Rinjani, Indonesia"
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:textColor="@color/link_blue"
+                android:layout_marginTop="4dp" />
+
+            <TextView
+                android:id="@+id/cardDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="The mighty Rinjani mountain of Gunung Rinjani is a massive volcano ..."
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:textColor="@color/gray"
+                android:layout_marginTop="4dp"
+                android:maxLines="2"
+                android:ellipsize="end" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical">
+
+                <!-- Аватар пользователя -->
+                <ImageView
+                    android:id="@+id/userAvatar"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="8dp"
+                    android:src="@drawable/profile_picture"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/account_avatar_profile_user" />
+
+                <!-- Никнейм пользователя -->
+                <TextView
+                    android:id="@+id/userNickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Arseniy"
+                    android:textAppearance="?attr/textAppearanceBody1"
+                    android:textColor="@color/black"
+                    android:fontFamily="sans-serif-medium" />
+            </LinearLayout>
+
+
+        </LinearLayout>
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
