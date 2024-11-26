@@ -58,6 +58,8 @@ dependencies {
     implementation(libs.logging.interceptor)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.jsoup)
+    implementation (libs.androidx.lifecycle.viewmodel.ktx) // Для ViewModel
+    implementation (libs.androidx.lifecycle.livedata.ktx) // Для LiveData
 
 
 

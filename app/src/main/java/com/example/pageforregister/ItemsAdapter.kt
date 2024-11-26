@@ -14,9 +14,9 @@ import android.widget.Toast
 class ItemsAdapter(var items: List<Item>, var context: Context) : RecyclerView.Adapter<ItemsAdapter.MyViewHolder>(){
 
     class MyViewHolder(view: View): RecyclerView.ViewHolder(view){
-        val image: ImageView = view.findViewById(R.id.imageView)
-        val title: TextView = view.findViewById(R.id.textView)
-        val author: TextView = view.findViewById(R.id.profileName)
+        val image: ImageView = view.findViewById(R.id.cardImage)
+        val title: TextView = view.findViewById(R.id.cardDescription)
+        val author: TextView = view.findViewById(R.id.userNickname)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
