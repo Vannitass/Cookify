@@ -1,4 +1,4 @@
-package com.example.pageforregister
+package com.example.pageforregister.MainPage
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.pageforregister.Profile.Profile
+import com.example.pageforregister.R
 import com.example.pageforregister.chat.Chat
 
 class MainPageActivity : AppCompatActivity() {
@@ -43,18 +45,30 @@ class MainPageActivity : AppCompatActivity() {
         val answer_search = search.text.toString()
 
 
-        items.add(Item(1, "tom", "Суп «Рамэн» — это одно из самых популярных блюд в Японии. Очень сытное блюдо. Готовят его практически на каждом шагу, вариаций супа великое множество, наверное, сколько поваров в Японии, столько и вариантов супов", "\n" +
+        items.add(
+            Item(1, "tom", "Суп «Рамэн» — это одно из самых популярных блюд в Японии. Очень сытное блюдо. Готовят его практически на каждом шагу, вариаций супа великое множество, наверное, сколько поваров в Японии, столько и вариантов супов", "\n" +
                 "Варить этот тайский суп меня научила знакомая кореянка. " +
                 "Она держит магазинчик на рынке с корейскими специями. " +
                 "И все, что нужно для приготовления, в таком магазинчике есть. " +
-                "Но и в обычном супермаркете можно купить специи для том яма.", "", "Arseniy"))
-        items.add(Item(2, "soupramen", "     Суп Рамэн", "\n" +
+                "Но и в обычном супермаркете можно купить специи для том яма.", "", "Arseniy")
+        )
+        items.add(
+            Item(2, "soupramen", "     Суп Рамэн", "\n" +
                 "Суп «Рамэн»— это одно из самых популярных блюд в Японии. " +
                 "Очень сытное блюдо. Готовят его практически на каждом шагу, " +
                 "вариаций супа великое множество, наверное, сколько поваров в Японии, " +
-                "столько и вариантов супов  ...", "", "Arseniy"))
+                "столько и вариантов супов  ...", "", "Arseniy")
+        )
 
         itemsList.layoutManager = LinearLayoutManager(this) // в каком формате будут распологаться элементы, как будто идут друг под другом
         itemsList.adapter = ItemsAdapter(items, this)
+
+
+
+
+    }
+
+    companion object {
+        const val NEW_POST_REQUEST_CODE = 1001
     }
 }

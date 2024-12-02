@@ -21,11 +21,11 @@
 
 
         <activity
-            android:name=".MainPageActivity"
+            android:name=".MainPage.MainPageActivity"
             android:exported="true" />
 
         <activity
-            android:name=".AuthActivity"
+            android:name=".RegAndAuthoriz.AuthActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,7 +34,7 @@
         </activity>
 
         <activity
-            android:name=".RegActivity"
+            android:name=".RegAndAuthoriz.RegActivity"
             android:exported="true" />
 
         <activity
@@ -42,11 +42,15 @@
             android:exported="true" />
 
         <activity
-            android:name=".Profile"
+            android:name=".Profile.Profile"
             android:exported="true" />
 
         <activity
-            android:name=".Card"
+            android:name=".MainPage.Card"
+            android:exported="true" />
+
+        <activity
+            android:name=".Profile.NewPostActivity"
             android:exported="true" />
 
         <meta-data

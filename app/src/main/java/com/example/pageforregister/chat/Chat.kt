@@ -9,8 +9,8 @@ import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.pageforregister.MainPageActivity
-import com.example.pageforregister.Profile
+import com.example.pageforregister.MainPage.MainPageActivity
+import com.example.pageforregister.Profile.Profile
 import com.example.pageforregister.R
 import android.text.Editable
 import android.text.TextWatcher

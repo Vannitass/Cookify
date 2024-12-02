@@ -1,4 +1,4 @@
-package com.example.pageforregister
+package com.example.pageforregister.RegAndAuthoriz
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pageforregister.networkapi.RetrofitInstance
 import android.util.Log
+import com.example.pageforregister.R
 import kotlinx.coroutines.*
 
 /**
