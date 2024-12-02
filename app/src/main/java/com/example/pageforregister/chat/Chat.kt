@@ -1,14 +1,19 @@
-package com.example.pageforregister
+package com.example.pageforregister.chat
 
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.ImageButton
-import android.widget.ListView
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.pageforregister.MainPageActivity
+import com.example.pageforregister.Profile
+import com.example.pageforregister.R
+import android.text.Editable
+import android.text.TextWatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,25 +24,15 @@ import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import java.net.URLEncoder
 
-/**
- * Activity, предоставляющая функционал чата с ботом.
- *
- * Бот отправляет запросы в Google, парсит ответы и отображает их в интерфейсе.
- */
 class Chat : AppCompatActivity() {
 
-    private lateinit var messageListView: ListView
+    private lateinit var itemsList: RecyclerView
     private lateinit var messageEditText: EditText
     private lateinit var sendButton: ImageButton
     private lateinit var loadingIndicator: ProgressBar
-    private lateinit var messageAdapter: ArrayAdapter<String>
-    private val messages = mutableListOf<String>()
+    private val messages = mutableListOf<Message>() // Список теперь содержит объекты Message
+    private lateinit var chatAdapter: MessageAdapter
 
-    /**
-     * Метод, вызываемый при создании активности.
-     *
-     * @param savedInstanceState Сохраненное состояние активности (если доступно).
-     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
@@ -64,45 +59,51 @@ class Chat : AppCompatActivity() {
             startActivity(Intent(this, Profile::class.java))
         }
 
-        // Инициализация компонентов чата
-        messageListView = findViewById(R.id.messageListView)
+        // Инициализация RecyclerView
+        itemsList = findViewById(R.id.messageListView)
+        chatAdapter = MessageAdapter(this, messages) // Передаем список Message
+        itemsList.layoutManager = LinearLayoutManager(this)
+        itemsList.adapter = chatAdapter
+
+        // Инициализация других компонентов
         messageEditText = findViewById(R.id.messageEditText)
         sendButton = findViewById(R.id.button_up)
         loadingIndicator = findViewById(R.id.loadingIndicator)
 
-        messageAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, messages)
-        messageListView.adapter = messageAdapter
-
         // Приветственное сообщение
-        addMessage("Привет! Введите запрос")
+        addMessage("Привет! Введите запрос", false)
+
+        // Инициализация кнопки отправки, чтобы она была неактивна, если поле ввода пусто
+        sendButton.isEnabled = false
+        messageEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(charSequence: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(editable: Editable?) {
+                sendButton.isEnabled = editable.toString().isNotEmpty()
+            }
+        })
 
         // Обработка нажатия кнопки "Отправить"
         sendButton.setOnClickListener {
             val userMessage = messageEditText.text.toString().trim()
             if (userMessage.isNotEmpty()) {
-                addMessage("Вы: $userMessage")
+                addMessage("Вы: $userMessage", true)
                 messageEditText.text.clear()
                 searchGoogle(userMessage)
             }
         }
     }
 
-    /**
-     * Метод для добавления сообщений в чат.
-     *
-     * @param message Текст сообщения.
-     */
-    private fun addMessage(message: String) {
+    private fun addMessage(text: String, isSent: Boolean) {
+        val time = "12:34" // Примерное время, можно добавить текущее время
+        val message = Message(text, time, isSent) // Создаем объект Message
         messages.add(message)
-        messageAdapter.notifyDataSetChanged()
-        messageListView.setSelection(messages.size - 1)
+        chatAdapter.notifyItemInserted(messages.size - 1)
+        itemsList.scrollToPosition(messages.size - 1)
     }
 
-    /**
-     * Метод для выполнения поиска в Google и парсинга результатов.
-     *
-     * @param query Запрос, введенный пользователем.
-     */
     private fun searchGoogle(query: String) {
         val url = "https://www.google.com/search?q=${URLEncoder.encode(query, "UTF-8")}"
 
@@ -128,22 +129,22 @@ class Chat : AppCompatActivity() {
 
                             withContext(Dispatchers.Main) {
                                 if (smartAnswer != null) {
-                                    addMessage("Ответ: $smartAnswer")
+                                    addMessage("Ответ: $smartAnswer", false)
                                 } else {
-                                    addMessage("Бот: Не удалось найти ответ.")
+                                    addMessage("Бот: Не удалось найти ответ.", false)
                                 }
                             }
                         }
                     } else {
                         withContext(Dispatchers.Main) {
-                            addMessage("Бот: Ошибка соединения с Google.")
+                            addMessage("Бот: Ошибка соединения с Google.", false)
                         }
                     }
                 }
             } catch (e: Exception) {
                 Log.e("NetworkError", "Ошибка сети: ${e.message}")
                 withContext(Dispatchers.Main) {
-                    addMessage("Бот: Произошла ошибка при попытке получить ответ.")
+                    addMessage("Бот: Произошла ошибка при попытке получить ответ.", false)
                 }
             } finally {
                 // Скрыть индикатор загрузки

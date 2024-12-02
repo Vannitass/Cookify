@@ -7,7 +7,7 @@ import android.util.Log
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-
+import com.example.pageforregister.chat.Chat
 
 
 class Profile : AppCompatActivity() {

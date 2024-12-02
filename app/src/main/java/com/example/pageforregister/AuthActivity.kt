@@ -51,7 +51,7 @@ class AuthActivity : AppCompatActivity() {
 
 
 
-                GlobalScope.launch(Dispatchers.IO) {
+                GlobalScope.launch(Dispatchers.IO) { //конструкция которая позволяет делать запрос к бд в фоновом потоке не мешая основному отресовывать
                     try {
                         val response = RetrofitInstance.api.greet("Auth", login, "", pass).execute()
 
