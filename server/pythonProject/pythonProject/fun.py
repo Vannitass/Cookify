@@ -46,3 +46,35 @@ def authenticate_user(log, pas):
         return None
     finally:
         conn.close()
+
+def add_recipe(title, description, image_path, content, author):
+    conn = sqlite3.connect(DATABASE_PATH)
+    cursor = conn.cursor()
+    try:
+        cursor.execute('''
+            INSERT INTO recipes (title, description, image_path, content, author)
+            VALUES (?, ?, ?, ?, ?)
+        ''', (title, description, image_path, content, author))
+        conn.commit()
+        return True
+    except sqlite3.Error as e:
+        print(f"Ошибка базы данных: {e}")
+        return False
+    finally:
+        conn.close()
+
+def get_all_recipes():
+    conn = sqlite3.connect(DATABASE_PATH)
+    cursor = conn.cursor()
+    try:
+        cursor.execute("SELECT * FROM recipes")
+        rows = cursor.fetchall()
+        return [
+            {"id": row[0], "title": row[1], "description": row[2], "image_path": row[3], "content": row[4], "author": row[5]}
+            for row in rows
+        ]
+    except sqlite3.Error as e:
+        print(f"Ошибка базы данных: {e}")
+        return []
+    finally:
+        conn.close()
