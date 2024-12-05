@@ -1,6 +1,8 @@
 package com.example.pageforregister.chat
 
 import android.content.Intent
+import android.icu.text.SimpleDateFormat
+import android.icu.util.Calendar
 import android.os.Bundle
 import android.util.Log
 import android.widget.EditText
@@ -23,6 +25,7 @@ import okhttp3.Request
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import java.net.URLEncoder
+import java.util.Locale
 
 @Suppress("DEPRECATION")
 class Chat : AppCompatActivity() {
@@ -51,11 +54,6 @@ class Chat : AppCompatActivity() {
             // Указываем входящую и исходящую анимации:
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
             startActivity(Intent(this, MainPageActivity::class.java))
-
-
-
-
-
 
         }
 
@@ -118,8 +116,10 @@ class Chat : AppCompatActivity() {
     }
 
     private fun addMessage(text: String, isSent: Boolean) {
-        val time = "12:34" // Примерное время, можно добавить текущее время
-        val message = Message(text, time, isSent) // Создаем объект Message
+        val calendar = Calendar.getInstance()
+        val timeFormat = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+        val currentTime = timeFormat.format(calendar.time) // Примерное время, можно добавить текущее время
+        val message = Message(text, currentTime, isSent) // Создаем объект Message
         messages.add(message)
         chatAdapter.notifyItemInserted(messages.size - 1)
         itemsList.scrollToPosition(messages.size - 1)
