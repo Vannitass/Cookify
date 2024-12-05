@@ -33,6 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/button_layout"
         android:orientation="horizontal"
+        android:background="@drawable/rounded_background"
         android:padding="8dp">
 
         <EditText
@@ -41,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="Введите сообщение"
-            android:background="@android:drawable/edit_text"
+            android:background="@android:color/transparent"
             android:padding="8dp"
             android:textSize="16sp" />
 
@@ -49,9 +50,10 @@
             android:id="@+id/button_up"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_menu_send"
             android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Отправить сообщение" />
+            android:contentDescription="Отправить сообщение"
+            android:layout_marginTop="3dp"
+            android:src="@android:drawable/ic_menu_send" />
     </LinearLayout>
 
     <!-- Индикатор загрузки -->
