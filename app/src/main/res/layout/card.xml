@@ -17,25 +17,31 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-            <!-- Текст поверх изображения -->
+        <!-- Текст поверх изображения -->
 
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="378dp"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/tom" />
+                android:src="@drawable/tom"
+
+                />
 
             <TextView
                 android:id="@+id/textView"
-                android:layout_width="200dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom|end"
-                android:background="#80ABA1A1"
+                android:layout_gravity="bottom"
+                android:background="#ffffff"
                 android:padding="10dp"
-                android:text="Ваш текст здесь"
-                android:textColor="@android:color/white" />
+                android:text="Суп Том-Ям"
+                android:textColor="@android:color/black"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="20sp"
+
+            />
         </FrameLayout>
     </androidx.cardview.widget.CardView>
 

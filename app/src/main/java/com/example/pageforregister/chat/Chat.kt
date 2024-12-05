@@ -24,6 +24,7 @@ import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import java.net.URLEncoder
 
+@Suppress("DEPRECATION")
 class Chat : AppCompatActivity() {
 
     private lateinit var itemsList: RecyclerView
@@ -42,9 +43,20 @@ class Chat : AppCompatActivity() {
         val imageButton2: ImageButton = findViewById(R.id.button2)
         val imageButton3: ImageButton = findViewById(R.id.button3)
 
+        val intentAnim = Intent(this, MainPageActivity::class.java)
+
         // Переход на главную страницу
         imageButton1.setOnClickListener {
+            startActivity(intentAnim)
+            // Указываем входящую и исходящую анимации:
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
             startActivity(Intent(this, MainPageActivity::class.java))
+
+
+
+
+
+
         }
 
         // Остаемся в чате, если он уже открыт
@@ -52,11 +64,20 @@ class Chat : AppCompatActivity() {
             if (this !is Chat) {
                 startActivity(Intent(this, Chat::class.java))
             }
+
         }
 
         // Переход на страницу профиля
         imageButton3.setOnClickListener {
+
+            startActivity(intentAnim)
+
+            // Указываем входящую и исходящую анимации:
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
             startActivity(Intent(this, Profile::class.java))
+
+
+
         }
 
         // Инициализация RecyclerView

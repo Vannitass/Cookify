@@ -14,6 +14,7 @@ import com.example.pageforregister.MainPage.MainPageActivity.Companion.NEW_POST_
 import com.example.pageforregister.R
 
 
+@Suppress("DEPRECATION")
 class Profile : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,21 +24,45 @@ class Profile : AppCompatActivity() {
         val imageButton1: ImageButton = findViewById(R.id.button1)
         val imageButton2: ImageButton = findViewById(R.id.button2)
         val imageButton3: ImageButton = findViewById(R.id.button3)
-
+        val intentAnim = Intent(this, MainPageActivity::class.java)
 
         imageButton1.setOnClickListener {
+
+
+
+
+            startActivity(intentAnim)
+            // Указываем входящую и исходящую анимации:
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+
             val intent = Intent(this, MainPageActivity::class.java)
             startActivity(intent)
+
+
+
+
+
+
         }
 
         imageButton2.setOnClickListener {
+            startActivity(intentAnim)
+
+            // Указываем входящую и исходящую анимации:
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+
             val intent = Intent(this, Chat::class.java)
             startActivity(intent)
+
+
+
         }
 
         imageButton3.setOnClickListener {
             val intent = Intent(this, Profile::class.java)
-            startActivity(intent)
+            if(this !is Profile) {
+                startActivity(intent)
+            }
         }
 
         val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)

@@ -12,14 +12,18 @@ import com.example.pageforregister.Profile.Profile
 import com.example.pageforregister.R
 import com.example.pageforregister.chat.Chat
 
+@Suppress("DEPRECATION")
 class MainPageActivity : AppCompatActivity() {
     @SuppressLint("WrongViewCast")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mainpage)
+        val intentAnim = Intent(this, MainPageActivity::class.java)
+
 
         val itemsList: RecyclerView = findViewById(R.id.itemsList)
         val items = arrayListOf<Item>()
+
 
         val imageButton1 = findViewById<AppCompatImageButton>(R.id.button1)
         val imageButton2 = findViewById<AppCompatImageButton>(R.id.button2)
@@ -29,17 +33,37 @@ class MainPageActivity : AppCompatActivity() {
 
         imageButton1.setOnClickListener {
             val intent = Intent(this, MainPageActivity::class.java)
-            startActivity(intent)
+            if (this !is MainPageActivity) {
+                startActivity(intent)
+            }
         }
 
         imageButton2.setOnClickListener {
+
+            startActivity(intentAnim)
+
+            // Указываем входящую и исходящую анимации:
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+
             val intent = Intent(this, Chat::class.java)
             startActivity(intent)
+
+
+
         }
 
         imageButton3.setOnClickListener {
+
+            startActivity(intentAnim)
+
+            // Указываем входящую и исходящую анимации:
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+
             val intent = Intent(this, Profile::class.java)
             startActivity(intent)
+
+
+
         }
 
         val answer_search = search.text.toString()
