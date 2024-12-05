@@ -7,7 +7,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitInstance {
-    private const val BASE_URL = "http://192.168.7.51:5000" // Убедитесь, что заменили на ваш IP
+    private const val BASE_URL = "http://192.168.1.144:5000" // Убедитесь, что заменили на ваш IP
 
     private val logging = HttpLoggingInterceptor().setLevel(
         if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY
