@@ -33,47 +33,99 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="8dp" />
 
-    <!-- Stats (Posts, Followers, Following) -->
-    <LinearLayout
-        android:id="@+id/statsLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/username"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
-        android:gravity="center">
 
-        <!-- Posts -->
-        <TextView
-            android:id="@+id/postsCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="452\nпосты"
-            android:textAlignment="center"
-            android:textSize="14sp" />
 
-        <!-- Followers -->
-        <TextView
-            android:id="@+id/followersCount"
-            android:layout_width="wrap_content"
+        <!-- Статистика: Посты / Подписчики / Подписки -->
+        <LinearLayout
+            android:id="@+id/statsLayout"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="1000\nподписчики"
-            android:textAlignment="center"
-            android:textSize="14sp"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp" />
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/username"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="40dp"
+            android:gravity="center"
+            android:weightSum="3">
 
-        <!-- Following -->
-        <TextView
-            android:id="@+id/followingCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="200\nподписки"
-            android:textAlignment="center"
-            android:textSize="14sp" />
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/postsCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="452"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/postsLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="посты"
+                    android:textColor="#808080"
+                    android:textSize="14sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/followersCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1346"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/followersLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="подписчики"
+                    android:textColor="#808080"
+                    android:textSize="14sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/followingCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="13"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/followingLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="подписки"
+                    android:textColor="#808080"
+                    android:textSize="14sp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
 
     <!-- Publish Button -->
     <Button
@@ -85,21 +137,21 @@
         app:layout_constraintTop_toBottomOf="@id/statsLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        style="@style/CustomButtonStyle"
+        android:layout_marginTop="16dp"
+        android:padding="15dp"
+        />
 
-    <!-- Settings Icon -->
-
-    <!-- Recipe Card Container -->
 
     <ImageView
-        android:id="@+id/settingsIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="84dp"
-        android:contentDescription="Settings Icon"
+        android:id="@+id/settingsButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:contentDescription="Настройки"
         android:src="@drawable/settings_svgrepo"
-        app:layout_constraintBottom_toBottomOf="@id/publishButton"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/publishButton"
         app:layout_constraintTop_toTopOf="@id/publishButton" />
 
     <LinearLayout
@@ -166,6 +218,7 @@
                 android:ellipsize="end" />
         </LinearLayout>
     </LinearLayout>
+
 
     <!-- Bottom Navigation -->
     <LinearLayout
