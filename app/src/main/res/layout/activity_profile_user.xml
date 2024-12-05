@@ -19,6 +19,7 @@
         android:contentDescription="Profile Picture"
         android:background="@drawable/account_avatar_profile_user" />
 
+
     <!-- Username -->
     <TextView
         android:id="@+id/username"
