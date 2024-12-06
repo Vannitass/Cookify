@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object RetrofitInstance {
-    private const val BASE_URL = "http://10.19.25.255:5000" // Убедитесь, что заменили на ваш IP
+    private const val BASE_URL = "http://10.192.223.155:5000" // Убедитесь, что заменили на ваш IP
 
     private val logging = HttpLoggingInterceptor().setLevel(
         if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY

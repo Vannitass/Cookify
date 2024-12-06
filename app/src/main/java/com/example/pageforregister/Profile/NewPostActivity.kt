@@ -7,8 +7,13 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.example.pageforregister.MainPage.MainPageActivity
 import com.example.pageforregister.R
 import com.example.pageforregister.networkapi.RetrofitInstance
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -85,22 +90,40 @@ class NewPostActivity : AppCompatActivity() {
         val authorPart = RequestBody.create("text/plain".toMediaTypeOrNull(), author.toString()) // Добавляем "author"
 
 // Вызов API
-        RetrofitInstance.api.uploadRecipe(titlePart, descriptionPart, contentPart, authorPart, body)
-            .enqueue(object : Callback<ResponseBody> {
-                override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                    if (response.isSuccessful) {
-                        Toast.makeText(this@NewPostActivity, "Рецепт успешно добавлен", Toast.LENGTH_SHORT).show()
-                        setResult(Activity.RESULT_OK)
-                        finish()
-                    } else {
-                        Toast.makeText(this@NewPostActivity, "Ошибка загрузки", Toast.LENGTH_SHORT).show()
-                    }
-                }
 
-                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                    Toast.makeText(this@NewPostActivity, "Ошибка подключения", Toast.LENGTH_SHORT).show()
+
+
+
+
+        GlobalScope.launch(Dispatchers.IO) { //конструкция которая позволяет делать запрос к бд в фоновом потоке не мешая основному отресовывать
+            try {
+                RetrofitInstance.api.uploadRecipe(titlePart, descriptionPart, contentPart, authorPart, body)
+                    .enqueue(object : Callback<ResponseBody> {
+                        override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                            if (response.isSuccessful) {
+                                Toast.makeText(this@NewPostActivity, "Рецепт успешно добавлен", Toast.LENGTH_SHORT).show()
+                                setResult(Activity.RESULT_OK)
+                                finish()
+                            } else {
+                                Toast.makeText(this@NewPostActivity, "Ошибка загрузки", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+
+                        override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                            Toast.makeText(this@NewPostActivity, "Ошибка подключения", Toast.LENGTH_SHORT).show()
+                        }
+                    })
+            } catch (e: Exception) {
+                Log.e("Exception", "Request error: ${e.message}")
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(this@NewPostActivity, "Ошибка подключения. Проверьте интернет.", Toast.LENGTH_LONG).show()
                 }
-            })
+            }
+        }
+
+
+
+
 
     }
 
