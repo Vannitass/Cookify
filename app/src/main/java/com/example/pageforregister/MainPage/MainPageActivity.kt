@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,9 +12,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pageforregister.Profile.Profile
 import com.example.pageforregister.R
 import com.example.pageforregister.chat.Chat
+import com.example.pageforregister.networkapi.RetrofitInstance
+
+import retrofit2.Callback
+import retrofit2.Call
+import retrofit2.Response
+
 
 @Suppress("DEPRECATION")
 class MainPageActivity : AppCompatActivity() {
+    private lateinit var itemsList: RecyclerView
+    //private val items = ArrayList<Item>()
+    private val items: MutableList<Item> = mutableListOf()
+
     @SuppressLint("WrongViewCast")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,10 +98,39 @@ class MainPageActivity : AppCompatActivity() {
         itemsList.layoutManager = LinearLayoutManager(this) // в каком формате будут распологаться элементы, как будто идут друг под другом
         itemsList.adapter = ItemsAdapter(items, this)
 
+        fetchRecipes()
 
 
 
     }
+
+    private fun fetchRecipes() {
+        RetrofitInstance.api.getRecipes().enqueue(object : Callback<List<Item>> {
+            override fun onResponse(call: Call<List<Item>>, response: Response<List<Item>>) {
+                if (response.isSuccessful) {
+                    val recipes = response.body()
+                    items.clear()
+                    recipes?.let { items.addAll(it) }
+                    itemsList.adapter = ItemsAdapter(items, this@MainPageActivity)
+                } else {
+                    Toast.makeText(
+                        this@MainPageActivity,
+                        "Ошибка загрузки рецептов",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+
+            override fun onFailure(call: Call<List<Item>>, t: Throwable) {
+                Toast.makeText(
+                    this@MainPageActivity,
+                    "Ошибка подключения",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        })
+    }
+
 
     companion object {
         const val NEW_POST_REQUEST_CODE = 1001

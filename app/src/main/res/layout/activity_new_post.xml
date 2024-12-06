@@ -58,6 +58,18 @@
                 android:layout_height="wrap_content"
                 android:hint="Описание приготовления" />
 
+            <!-- Подробное описание рецепта -->
+            <EditText
+                android:id="@+id/edit_dish_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Подробное описание рецепта"
+                android:inputType="textMultiLine"
+                android:lines="4"
+                android:gravity="top"
+                android:layout_marginTop="8dp" />
+
+
             <!-- Время приготовления (необязательно) -->
             <EditText
                 android:id="@+id/edit_dish_time"

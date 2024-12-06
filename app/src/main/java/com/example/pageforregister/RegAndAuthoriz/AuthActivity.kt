@@ -49,9 +49,6 @@ class AuthActivity : AppCompatActivity() {
             if (login == "" || pass == "") //если одно из полей пустое
                 Toast.makeText(this, "Не все поля заполнены", Toast.LENGTH_LONG).show()
             else {   //регистрация пользователя
-
-
-
                 GlobalScope.launch(Dispatchers.IO) { //конструкция которая позволяет делать запрос к бд в фоновом потоке не мешая основному отресовывать
                     try {
                         val response = RetrofitInstance.api.greet("Auth", login, "", pass).execute()

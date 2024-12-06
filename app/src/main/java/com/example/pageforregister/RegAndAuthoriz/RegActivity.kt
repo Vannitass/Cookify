@@ -25,6 +25,7 @@ class RegActivity : AppCompatActivity() {
      *
      * @param savedInstanceState Сохраненное состояние активности (если доступно).
      */
+    @OptIn(DelicateCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reg)
