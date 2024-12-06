@@ -42,13 +42,15 @@ class ItemsAdapter(var items: List<Item>, var context: Context) : RecyclerView.A
         holder.image.setImageResource(imageId)
 
         holder.itemView.setOnClickListener {
-            // Действие при нажатии на элемент, например, можно передать данные в новую активность
-            Toast.makeText(context, "Clicked: ${items[position].title}", Toast.LENGTH_SHORT).show()
-
-            // Переход на другую активность при нажатии на элемент
             val intent = Intent(context, Card::class.java)
+            intent.putExtra("title", items[position].title)
+            intent.putExtra("description", items[position].desc)
+            intent.putExtra("content", items[position].text)
+            intent.putExtra("author", items[position].author)
+            intent.putExtra("imagePath", items[position].image)
             context.startActivity(intent)
         }
+
     }
 
 

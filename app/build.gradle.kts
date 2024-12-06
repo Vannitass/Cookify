@@ -60,6 +60,8 @@ dependencies {
     implementation(libs.jsoup)
     implementation (libs.androidx.lifecycle.viewmodel.ktx) // Для ViewModel
     implementation (libs.androidx.lifecycle.livedata.ktx) // Для LiveData
+    implementation("com.squareup.picasso:picasso:2.71828") // Для загрузки изображений
+
 
 
 
