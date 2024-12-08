@@ -19,15 +19,13 @@ class Card : AppCompatActivity() {
         val author = intent.getStringExtra("author")
         val imagePath = intent.getStringExtra("imagePath")
 
-        val titleTextView = findViewById<TextView>(R.id.profileName)
+        val titleTextView = findViewById<TextView>(R.id.recipeTitle)
         val descriptionTextView = findViewById<TextView>(R.id.cardDescription)
-        val contentTextView = findViewById<TextView>(R.id.textView)
         val authorTextView = findViewById<TextView>(R.id.profileName)
         val imageView = findViewById<ImageView>(R.id.imageView)
 
         titleTextView.text = title
         descriptionTextView.text = description
-        contentTextView.text = content
         authorTextView.text = "Автор: $author"
 
         // Используем Picasso для загрузки изображения

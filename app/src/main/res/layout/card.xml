@@ -32,7 +32,7 @@
 
 
             <ImageView
-                android:id="@+id/recipeImage"
+                android:id="@+id/imageView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:tint="#30000000"
@@ -56,8 +56,8 @@
                 android:textColor="#FFFFFF"
                 android:textSize="30dp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@id/recipeImage"
-                app:layout_constraintEnd_toEndOf="@id/recipeImage" />
+                app:layout_constraintBottom_toBottomOf="@id/imageView"
+                app:layout_constraintEnd_toEndOf="@id/imageView" />
 
 
         </FrameLayout>
@@ -76,7 +76,9 @@
             android:id="@+id/profileLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_weight="1"
+
+            >
 
             <ImageView
                 android:id="@+id/profileImage"
@@ -99,6 +101,7 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/cardDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Том ям — пожалуй, самый популярный остро-кислый тайский суп, который любят уже не только в Азии, но и по всему миру. Готовить его довольно просто и быстро, главное — просто купить все нужные ингредиенты. Считается, что классический том ям готовят без кокосового молока, при этом наиболее популярный и вкусный на наш взгляд вариант — всё же с кокосовым молоком. Также традиционно том ям подают с варёным рисом: он помогает снизить остроту супа и делает его сытнее."
