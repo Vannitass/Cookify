@@ -47,14 +47,14 @@ def authenticate_user(log, pas):
     finally:
         conn.close()
 
-def add_recipe(title, description, image_path, content, author):
+def add_recipe(title, description, image_path, author):
     conn = sqlite3.connect(DATABASE_PATH)
     cursor = conn.cursor()
     try:
         cursor.execute('''
-            INSERT INTO recipes (title, description, image_path, content, author)
-            VALUES (?, ?, ?, ?, ?)
-        ''', (title, description, image_path, content, author))
+            INSERT INTO recipes (title, description, image_path, author)
+            VALUES (?, ?, ?, ?)
+        ''', (title, description, image_path, author))
         conn.commit()
         return True
     except sqlite3.Error as e:
@@ -63,6 +63,7 @@ def add_recipe(title, description, image_path, content, author):
     finally:
         conn.close()
 
+
 def get_all_recipes():
     conn = sqlite3.connect(DATABASE_PATH)
     cursor = conn.cursor()
@@ -70,11 +71,11 @@ def get_all_recipes():
         cursor.execute("SELECT * FROM recipes")
         rows = cursor.fetchall()
         return [
-            {"id": row[0], "title": row[1], "description": row[2], "image_path": row[3], "content": row[4], "author": row[5]}
+            {"id": row[0], "title": row[1], "description": row[2], "image_path": row[3], "author": row[4]}
             for row in rows
         ]
-    except sqlite3.Error as e:
+    except sqlite3.OperationalError as e:
         print(f"Ошибка базы данных: {e}")
-        return []
+        return []  # Возвращает пустой список, чтобы избежать краха
     finally:
         conn.close()
