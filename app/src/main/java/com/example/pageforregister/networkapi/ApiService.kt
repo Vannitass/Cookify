@@ -1,6 +1,8 @@
 package com.example.pageforregister.networkapi
 
 import com.example.pageforregister.MainPage.Item
+import com.example.pageforregister.MainPage.Recipe
+import com.example.pageforregister.MainPage.RecipeResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
@@ -24,10 +26,10 @@ interface ApiService {
     fun uploadRecipe(
         @Part("title") title: RequestBody,
         @Part("description") description: RequestBody,
-        @Part("content") content: RequestBody,
         @Part("author") author: RequestBody,
         @Part image: MultipartBody.Part
     ): Call<ResponseBody>
     @GET("get_recipes")
-    fun getRecipes(): Call<List<Item>>
+//    fun getRecipes(): Call<List<RecipeResponse>>  // это по 2 методу выгрузки
+    fun getRecipes(): Call<RecipeResponse>  // это по 3 методу
 }

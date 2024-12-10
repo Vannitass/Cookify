@@ -39,9 +39,6 @@ class Card : AppCompatActivity() {
         val intentAnim = Intent(this, MainPageActivity::class.java)
 
 
-
-
-
         // Устанавливаем текстовые значения
         titleTextView.text = title
         descriptionTextView.text = description
