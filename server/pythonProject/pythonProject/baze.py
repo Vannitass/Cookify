@@ -6,7 +6,7 @@ conn = sqlite3.connect('app_database.db')
 # Создаем объект курсора для выполнения SQL-запросов
 cursor = conn.cursor()
 
-# Создаем таблицу с четырьмя полями
+# Создаем таблицу пользователей
 cursor.execute('''
 CREATE TABLE IF NOT EXISTS my_table (
     id INTEGER PRIMARY KEY,
@@ -16,17 +16,19 @@ CREATE TABLE IF NOT EXISTS my_table (
 )
 ''')
 
-# Таблица рецептов
+# Создаем таблицу рецептов
 cursor.execute('''
 CREATE TABLE IF NOT EXISTS recipes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL,
     description TEXT NOT NULL,
     image_path TEXT NOT NULL,
-    content TEXT NOT NULL,
     author TEXT NOT NULL
 )
 ''')
 
+# Применяем изменения и закрываем соединение
 conn.commit()
 conn.close()
+
+print("Инициализация базы данных завершена успешно.")
