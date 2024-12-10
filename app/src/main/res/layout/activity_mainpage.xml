@@ -21,7 +21,8 @@
 
 
         tools:layout_editor_absoluteX="-8dp"
-        tools:layout_editor_absoluteY="16dp">
+        tools:layout_editor_absoluteY="16dp"
+        tools:ignore="MissingConstraints">
 
         <EditText
             android:id="@+id/search"

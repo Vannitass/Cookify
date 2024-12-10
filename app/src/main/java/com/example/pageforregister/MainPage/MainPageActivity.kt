@@ -1,8 +1,10 @@
 package com.example.pageforregister.MainPage
 
+import RecipeAdapter
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -21,9 +23,9 @@ import retrofit2.Response
 
 @Suppress("DEPRECATION")
 class MainPageActivity : AppCompatActivity() {
-    private lateinit var itemsList: RecyclerView
-    //private val items = ArrayList<Item>()
-    private val items: MutableList<Item> = mutableListOf()
+
+    private lateinit var recipeAdapter: RecipeAdapter
+    private lateinit var recyclerView: RecyclerView
 
     @SuppressLint("WrongViewCast")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -79,54 +81,43 @@ class MainPageActivity : AppCompatActivity() {
 
         val answer_search = search.text.toString()
 
-
-        items.add(
-            Item(1, "tom", "Суп «Рамэн» — это одно из самых популярных блюд в Японии. Очень сытное блюдо. Готовят его практически на каждом шагу, вариаций супа великое множество, наверное, сколько поваров в Японии, столько и вариантов супов", "\n" +
-                "Варить этот тайский суп меня научила знакомая кореянка. " +
-                "Она держит магазинчик на рынке с корейскими специями. " +
-                "И все, что нужно для приготовления, в таком магазинчике есть. " +
-                "Но и в обычном супермаркете можно купить специи для том яма.", "", "Arseniy")
-        )
-        items.add(
-            Item(2, "soupramen", "     Суп Рамэн", "\n" +
-                "Суп «Рамэн»— это одно из самых популярных блюд в Японии. " +
-                "Очень сытное блюдо. Готовят его практически на каждом шагу, " +
-                "вариаций супа великое множество, наверное, сколько поваров в Японии, " +
-                "столько и вариантов супов  ...", "", "Arseniy")
-        )
-
+        // вот эти 2 под вопросом
         itemsList.layoutManager = LinearLayoutManager(this) // в каком формате будут распологаться элементы, как будто идут друг под другом
         itemsList.adapter = ItemsAdapter(items, this)
 
+
+        // Инициализация RecyclerView
+        recyclerView = findViewById(R.id.itemsList)
+        recipeAdapter = RecipeAdapter(mutableListOf()) // Начальный пустой список
+        recyclerView.adapter = recipeAdapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
+
+        // Загрузка рецептов с сервера
         fetchRecipes()
-
-
 
     }
 
     private fun fetchRecipes() {
-        RetrofitInstance.api.getRecipes().enqueue(object : Callback<List<Item>> {
-            override fun onResponse(call: Call<List<Item>>, response: Response<List<Item>>) {
+        // метод выгрузки из базы данных
+        RetrofitInstance.api.getRecipes().enqueue(object : Callback<RecipeResponse> {
+            override fun onResponse(call: Call<RecipeResponse>, response: Response<RecipeResponse>) {
                 if (response.isSuccessful) {
-                    val recipes = response.body()
-                    items.clear()
-                    recipes?.let { items.addAll(it) }
-                    itemsList.adapter = ItemsAdapter(items, this@MainPageActivity)
+                    val recipeResponse = response.body()
+                    val recipes = recipeResponse?.recipes
+                    recipes?.let {
+                        Log.d("Recipes", "Загруженные рецепты: $it")
+                        recipeAdapter.updateRecipes(it) // Обновляем адаптер
+                    }
                 } else {
-                    Toast.makeText(
-                        this@MainPageActivity,
-                        "Ошибка загрузки рецептов",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Log.e("Error", "Ошибка сервера: ${response.message()}")
+                    Toast.makeText(this@MainPageActivity, "Ошибка загрузки рецептов", Toast.LENGTH_SHORT).show()
                 }
             }
 
-            override fun onFailure(call: Call<List<Item>>, t: Throwable) {
-                Toast.makeText(
-                    this@MainPageActivity,
-                    "Ошибка подключения",
-                    Toast.LENGTH_SHORT
-                ).show()
+            override fun onFailure(call: Call<RecipeResponse>, t: Throwable) {
+                Log.e("Error", "Ошибка подключения: ${t.message}")
+                Toast.makeText(this@MainPageActivity, "Ошибка подключения", Toast.LENGTH_SHORT).show()
             }
         })
     }

@@ -45,7 +45,6 @@ class ItemsAdapter(var items: List<Item>, var context: Context) : RecyclerView.A
             val intent = Intent(context, Card::class.java)
             intent.putExtra("title", items[position].title)
             intent.putExtra("description", items[position].desc)
-            intent.putExtra("content", items[position].text)
             intent.putExtra("author", items[position].author)
             intent.putExtra("imagePath", items[position].image)
             context.startActivity(intent)
