@@ -76,7 +76,8 @@
             android:id="@+id/button1"
             android:layout_width="50dp"
             android:layout_height="53dp"
-            android:background="?android:attr/selectableItemBackground"
+            android:background="@drawable/rectangle_1"
+
             android:src="@drawable/but2"
             android:text="home" />
 
@@ -86,7 +87,8 @@
             android:layout_height="53dp"
             android:layout_marginLeft="90dp"
             android:layout_marginRight="90dp"
-            android:background="@drawable/rectangle_1"
+            android:background="?android:attr/selectableItemBackground"
+
             android:src="@drawable/but1"
             android:text="chat" />
 
