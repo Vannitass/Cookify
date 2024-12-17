@@ -50,6 +50,7 @@ dependencies {
     implementation(libs.filament.android)
     implementation(libs.firebase.database.ktx)
     testImplementation(libs.junit)
+    testImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation (libs.retrofit)
@@ -60,9 +61,6 @@ dependencies {
     implementation(libs.jsoup)
     implementation (libs.androidx.lifecycle.viewmodel.ktx) // Для ViewModel
     implementation (libs.androidx.lifecycle.livedata.ktx) // Для LiveData
-    implementation(libs.picasso) // Для загрузки изображений
-
-
-
+    implementation(libs.picasso)   // Для загрузки изображений
 
 }

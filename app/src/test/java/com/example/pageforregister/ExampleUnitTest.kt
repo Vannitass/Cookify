@@ -1,17 +1,27 @@
-package com.example.pageforregister
-
+import org.junit.Assert.*
 import org.junit.Test
 
-import org.junit.Assert.*
-
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
 class ExampleUnitTest {
+
     @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+    fun `check fields validation when empty`() {
+        val login = ""
+        val email = ""
+        val pass = ""
+
+        val isValid = login.isNotEmpty() && email.isNotEmpty() && pass.isNotEmpty()
+
+        assertFalse("Fields validation should fail for empty fields", isValid)
+    }
+
+    @Test
+    fun `check fields validation for valid inputs`() {
+        val login = "testUser"
+        val email = "test@example.com"
+        val pass = "password"
+
+        val isValid = login.isNotEmpty() && email.isNotEmpty() && pass.isNotEmpty()
+
+        assertTrue("Fields validation should pass for valid inputs", isValid)
     }
 }
