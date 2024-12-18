@@ -1,42 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:orientation="vertical"
-android:padding="16dp">
-
-<ImageView
-    android:id="@+id/imageView"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
-    android:scaleType="centerCrop" />
-
-<TextView
-    android:id="@+id/profileName"
-    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Название рецепта"
-    android:textSize="18sp"
-    android:layout_marginTop="8dp"
-    android:textColor="@android:color/black" />
+    android:orientation="vertical"
+    android:padding="16dp">
 
-<TextView
-    android:id="@+id/cardDescription"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Краткое описание"
-    android:textSize="16sp"
-    android:layout_marginTop="4dp"
-    android:textColor="@android:color/darker_gray" />
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/exit"
+        android:contentDescription="Back"
 
-<TextView
-    android:id="@+id/textView"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Подробное описание рецепта"
-    android:layout_marginTop="8dp"
-    android:textColor="@android:color/black" />
+        android:background="?android:attr/selectableItemBackground"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="378dp"
+        app:cardCornerRadius="20dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <!-- Текст поверх изображения -->
+
+
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:tint="#30000000"
+                android:scaleType="centerCrop"
+                android:src="@drawable/tomyam"
+                android:background="@drawable/rounded_image"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="parent"
+                tools:ignore="UseAppTint" />
+
+            <TextView
+                android:id="@+id/recipeTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+
+                android:padding="4dp"
+                android:text="Суп Том-Ям"
+                android:layout_gravity="bottom|end"
+                android:textColor="#FFFFFF"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/imageView"
+                app:layout_constraintEnd_toEndOf="@id/imageView" />
+
+
+        </FrameLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- LinearLayout для профиля и кнопки -->
+    <LinearLayout
+        android:id="@+id/profileContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
+
+        <!-- Иконка с именем профиля -->
+        <RelativeLayout
+            android:id="@+id/profileLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+
+            >
+
+            <ImageView
+                android:id="@+id/profileImage"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_profile"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true" />
+
+            <TextView
+                android:id="@+id/profileName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Имя пользователя"
+                android:layout_toEndOf="@id/profileImage"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/cardDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Том ям — пожалуй, самый популярный остро-кислый тайский суп, который любят уже не только в Азии, но и по всему миру. Готовить его довольно просто и быстро, главное — просто купить все нужные ингредиенты. Считается, что классический том ям готовят без кокосового молока, при этом наиболее популярный и вкусный на наш взгляд вариант — всё же с кокосовым молоком. Также традиционно том ям подают с варёным рисом: он помогает снизить остроту супа и делает его сытнее."
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:lineSpacingExtra="4dp"
+        android:layout_margin="16dp"
+        android:fontFamily="sans-serif"
+        android:letterSpacing="0.01"
+        android:gravity="start" />
 
 </LinearLayout>
-

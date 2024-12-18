@@ -30,6 +30,4 @@ interface ApiService {
     ): Call<ResponseBody>
     @GET("get_recipes")
     fun getRecipes(): Call<List<Item>>
-    @GET("search")
-    fun searchRecipes(@Query("query") query: String): Call<List<Item>>
 }

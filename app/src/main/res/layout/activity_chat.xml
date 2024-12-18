@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -25,16 +26,14 @@
         android:dividerHeight="8dp"
         android:padding="8dp" />
 
-    <!-- Поле ввода сообщения -->
+    <!-- Поле ввода и кнопка отправки -->
     <LinearLayout
         android:id="@+id/messageInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/button_layout"
         android:orientation="horizontal"
-        android:background="@drawable/input_background"
-        android:padding="8dp"
-        android:elevation="4dp">
+        android:padding="8dp">
 
         <EditText
             android:id="@+id/messageEditText"
@@ -42,20 +41,16 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="Введите сообщение"
-            android:padding="12dp"
-            android:textSize="16sp"
-            android:background="@null"
-            android:backgroundTint="#FFFFFF"
-            android:elevation="2dp" />
+            android:background="@android:drawable/edit_text"
+            android:padding="8dp"
+            android:textSize="16sp" />
 
         <ImageButton
             android:id="@+id/button_up"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@android:drawable/ic_menu_send"
             android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:backgroundTint="#FF5722"
-            android:elevation="4dp"
             android:contentDescription="Отправить сообщение" />
     </LinearLayout>
 
@@ -103,4 +98,5 @@
             android:src="@drawable/but3"
             android:contentDescription="User" />
     </LinearLayout>
+
 </RelativeLayout>

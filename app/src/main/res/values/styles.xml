@@ -3,8 +3,19 @@
     <style name="AppThemeColor" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryDark">@color/white</item>
-        <item name="colorAccent">@color/white</item>
+        <item name="colorAccent">@color/black</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:navigationBarColor">@color/white</item>
+
+
     </style>
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.DarkActionBar"> </style>
+    <style name="CustomButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">#50C878</item>
+        <item name="cornerRadius">20dp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:elevation">4dp</item>
+    </style>
+
+
 </resources>

@@ -14,9 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppThemeColor"
         tools:targetApi="31">
-        <activity
-            android:name=".MainActivity"
-            android:exported="false" />
+
         <!-- android:theme="@style/Theme.PageForRegister" -->
         <activity
             android:name=".MainPage.MainPageActivity"

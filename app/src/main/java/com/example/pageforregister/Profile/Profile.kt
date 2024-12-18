@@ -28,19 +28,12 @@ class Profile : AppCompatActivity() {
 
         imageButton1.setOnClickListener {
 
-
-
-
             startActivity(intentAnim)
             // Указываем входящую и исходящую анимации:
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
 
             val intent = Intent(this, MainPageActivity::class.java)
             startActivity(intent)
-
-
-
-
 
 
         }
@@ -53,8 +46,6 @@ class Profile : AppCompatActivity() {
 
             val intent = Intent(this, Chat::class.java)
             startActivity(intent)
-
-
 
         }
 
