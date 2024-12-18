@@ -24,6 +24,15 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
 
+
+/**
+ * `NewPostActivity` — Activity для создания нового поста/рецепта.
+ *
+ * Функциональность:
+ * - Выбор изображения из галереи.
+ * - Ввод заголовка, описания и содержимого рецепта.
+ * - Загрузка рецепта на сервер.
+ */
 class NewPostActivity : AppCompatActivity() {
 
     private lateinit var imagePreview: ImageView
@@ -34,6 +43,11 @@ class NewPostActivity : AppCompatActivity() {
     private lateinit var chooseImageButton: Button
     private var selectedImageUri: Uri? = null
 
+    /**
+     * Инициализация Activity. Устанавливает макет, находит элементы интерфейса и назначает обработчики событий.
+     *
+     * @param savedInstanceState сохранённое состояние Activity.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_post)
@@ -55,7 +69,13 @@ class NewPostActivity : AppCompatActivity() {
             uploadRecipe()
         }
     }
-
+    /**
+     * Обработка результата выбора изображения из галереи.
+     *
+     * @param requestCode код запроса.
+     * @param resultCode код результата.
+     * @param data данные, возвращённые из другой Activity.
+     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == IMAGE_PICK_CODE && resultCode == Activity.RESULT_OK) {
@@ -63,7 +83,10 @@ class NewPostActivity : AppCompatActivity() {
             imagePreview.setImageURI(selectedImageUri)
         }
     }
-
+    /**
+     * Загружает рецепт на сервер. Проверяет корректность введённых данных
+     * и отправляет их с помощью API.
+     */
     private fun uploadRecipe() {
         val title = titleEditText.text.toString()
         val description = descriptionEditText.text.toString()

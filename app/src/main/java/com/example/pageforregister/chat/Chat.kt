@@ -26,7 +26,16 @@ import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import java.net.URLEncoder
 import java.util.Locale
-
+/**
+ * Класс `Chat` реализует экран чата в приложении.
+ *
+ * Особенности:
+ * - Отображение сообщений в списке RecyclerView.
+ * - Обработка пользовательских запросов и отправка их в Google Search.
+ * - Отображение результатов поиска, полученных через парсинг HTML.
+ * - Приветственное сообщение и управление состоянием кнопки отправки.
+ * - Навигация между основными экранами приложения (главная страница, чат, профиль).
+ */
 @Suppress("DEPRECATION")
 class Chat : AppCompatActivity() {
 
@@ -114,7 +123,12 @@ class Chat : AppCompatActivity() {
             }
         }
     }
-
+    /**
+     * Добавляет новое сообщение в чат.
+     *
+     * @param text Текст сообщения.
+     * @param isSent Указывает, отправлено ли сообщение пользователем (true) или получено от бота (false).
+     */
     private fun addMessage(text: String, isSent: Boolean) {
         val calendar = Calendar.getInstance()
         val timeFormat = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
@@ -124,7 +138,11 @@ class Chat : AppCompatActivity() {
         chatAdapter.notifyItemInserted(messages.size - 1)
         itemsList.scrollToPosition(messages.size - 1)
     }
-
+    /**
+     * Выполняет поиск в Google с использованием введённого пользователем запроса.
+     *
+     * @param query Текст запроса.
+     */
     private fun searchGoogle(query: String) {
         val url = "https://www.google.com/search?q=${URLEncoder.encode(query, "UTF-8")}"
 

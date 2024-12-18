@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pageforregister.networkapi.RetrofitInstance
 import android.util.Log
+import com.example.pageforregister.MainPage.MainPageActivity
 import com.example.pageforregister.R
 import kotlinx.coroutines.*
 
@@ -22,8 +23,13 @@ class RegActivity : AppCompatActivity() {
 
     /**
      * Метод, вызываемый при создании активности.
-     *
+     * Регистрирует нового пользователя в системе.
      * @param savedInstanceState Сохраненное состояние активности (если доступно).
+     * @param username имя пользователя.
+     * @param email электронная почта.
+     * @param password хэшированный пароль.
+     * @return `true`, если регистрация прошла успешно, иначе `false`.
+     * @throws SQLiteException если произошла ошибка работы с базой данных.
      */
     @OptIn(DelicateCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,6 +73,7 @@ class RegActivity : AppCompatActivity() {
                                 userEmail.text.clear()
                                 userPass.text.clear()
 
+                                startActivity(Intent(this@RegActivity, AuthActivity::class.java))
                                 }
 
                             } else {
