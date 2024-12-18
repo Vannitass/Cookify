@@ -25,7 +25,12 @@ class AuthActivity : AppCompatActivity() {
      * Метод, вызываемый при создании активности.
      *
      * @param savedInstanceState Сохраненное состояние активности (если доступно).
+     * @param username имя пользователя.
+     * @param password пароль.
+     * @return `User` объект, если пользователь найден, иначе `null`.
+     * @throws SQLiteException если произошла ошибка работы с базой данных.
      */
+
     @OptIn(DelicateCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
