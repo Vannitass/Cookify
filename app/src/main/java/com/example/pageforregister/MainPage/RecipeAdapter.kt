@@ -30,15 +30,11 @@ class RecipeAdapter(private val recipes: MutableList<Recipe>) : RecyclerView.Ada
         holder.description.text = recipe.description
         holder.author.text = recipe.author
 
-//        // Загрузка изображения с помощью Picasso вариант 1
-//        Picasso.get()
-//            .load("http://<IP>:5000/${recipe.image_path}") // Замените <IP> на IP вашего сервера
-//            .placeholder(R.drawable.placeholder_image) // Плейсхолдер во время загрузки
-//            //.error(R.drawable.error_image) // Изображение при ошибке загрузки
-//            .into(holder.image)
 
-//        // Загрузка изображения с помощью Picasso  вариант 2
-        Picasso.get().load(recipe.image_path).into(holder.image)
+        Picasso.get()
+            .load(recipe.image_path) // Используем полный URL из поля image_path
+            .placeholder(R.drawable.placeholder_image) // Плейсхолдер во время загрузки
+            .into(holder.image)
 
         holder.itemView.setOnClickListener {
             val context = holder.itemView.context
@@ -52,8 +48,6 @@ class RecipeAdapter(private val recipes: MutableList<Recipe>) : RecyclerView.Ada
             context.startActivity(intent)
         }
 
-
-        //Picasso.get().load("https://i.imgur.com/1x9VolV.jpeg").into(holder.image)
     }
 
     override fun getItemCount(): Int = recipes.size

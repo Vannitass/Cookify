@@ -35,10 +35,6 @@ class MainPageActivity : AppCompatActivity() {
         val intentAnim = Intent(this, MainPageActivity::class.java)
 
 
-        val itemsList: RecyclerView = findViewById(R.id.itemsList)
-        val items = arrayListOf<Item>()
-
-
         val imageButton1 = findViewById<AppCompatImageButton>(R.id.button1)
         val imageButton2 = findViewById<AppCompatImageButton>(R.id.button2)
         val imageButton3 = findViewById<AppCompatImageButton>(R.id.button3)
@@ -81,10 +77,6 @@ class MainPageActivity : AppCompatActivity() {
         }
 
         val answer_search = search.text.toString()
-
-        // вот эти 2 под вопросом
-//        itemsList.layoutManager = LinearLayoutManager(this) // в каком формате будут распологаться элементы, как будто идут друг под другом
-//        itemsList.adapter = ItemsAdapter(items, this)
 
 
         // Инициализация RecyclerView
