@@ -44,7 +44,15 @@ class NewPostActivity : AppCompatActivity() {
         //contentEditText = findViewById(R.id.edit_dish_content)
         uploadButton = findViewById(R.id.btn_publish)
         chooseImageButton = findViewById(R.id.btn_choose_photo)
+        val intentAnim = Intent(this, MainPageActivity::class.java)
+        val buttonBack: ImageButton = this.findViewById(R.id.backButton)
 
+
+        buttonBack.setOnClickListener {
+            startActivity(Intent(this, Profile::class.java))
+            // Указываем входящую и исходящую анимации
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+        }
         // Обработчик выбора изображения
         chooseImageButton.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK)

@@ -17,18 +17,23 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
-            <Button
+            <ImageButton
                 android:id="@+id/backButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#50C878"
-                android:onClick="onBackPressed"
-                android:text="Назад" />
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="30dp"
+
+                android:src="@drawable/exit"
+                android:contentDescription="Back"
+
+                android:background="?android:attr/selectableItemBackground"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
 
             <ImageView
                 android:id="@+id/image_preview"
-                android:layout_width="200dp"
+                android:layout_width="match_parent"
                 android:layout_height="200dp"
                 app:srcCompat="@drawable/soupramen" />
 
