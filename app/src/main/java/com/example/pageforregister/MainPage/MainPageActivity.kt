@@ -15,6 +15,7 @@ import com.example.pageforregister.Profile.Profile
 import com.example.pageforregister.R
 import com.example.pageforregister.chat.Chat
 import com.example.pageforregister.networkapi.RetrofitInstance
+import com.squareup.picasso.Picasso
 
 import retrofit2.Callback
 import retrofit2.Call
@@ -82,8 +83,8 @@ class MainPageActivity : AppCompatActivity() {
         val answer_search = search.text.toString()
 
         // вот эти 2 под вопросом
-        itemsList.layoutManager = LinearLayoutManager(this) // в каком формате будут распологаться элементы, как будто идут друг под другом
-        itemsList.adapter = ItemsAdapter(items, this)
+//        itemsList.layoutManager = LinearLayoutManager(this) // в каком формате будут распологаться элементы, как будто идут друг под другом
+//        itemsList.adapter = ItemsAdapter(items, this)
 
 
         // Инициализация RecyclerView
@@ -95,6 +96,8 @@ class MainPageActivity : AppCompatActivity() {
 
         // Загрузка рецептов с сервера
         fetchRecipes()
+
+        Picasso.Builder(applicationContext).loggingEnabled(true).build();
 
     }
 

@@ -153,73 +153,88 @@
         app:layout_constraintStart_toEndOf="@id/publishButton"
         app:layout_constraintTop_toTopOf="@id/publishButton" />
 
-    <LinearLayout
-        android:id="@+id/recipeCardsContainer"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:orientation="vertical"
-        android:padding="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/publishButton">
+<!--    <LinearLayout-->
+<!--        android:id="@+id/recipeCardsContainer"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:orientation="vertical"-->
+<!--        android:padding="8dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/publishButton">-->
 
-        <!-- Recipe Card 1 -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:orientation="horizontal"
-            android:padding="8dp">
+<!--        &lt;!&ndash; Recipe Card 1 &ndash;&gt;-->
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginBottom="8dp"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:padding="8dp">-->
 
-            <ImageView
-                android:id="@+id/recipeImage1"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:contentDescription="Recipe Image"
-                android:src="@drawable/soupramen" />
+<!--            <ImageView-->
+<!--                android:id="@+id/recipeImage1"-->
+<!--                android:layout_width="50dp"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:contentDescription="Recipe Image"-->
+<!--                android:src="@drawable/soupramen" />-->
 
-            <TextView
-                android:id="@+id/recipeText1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_weight="1"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:text="Суп «Рамен» — это одно из самых популярных блюд в Японии. Очень сытное блюдо..."
-                android:textSize="12sp" />
-        </LinearLayout>
+<!--            <TextView-->
+<!--                android:id="@+id/recipeText1"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="8dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:ellipsize="end"-->
+<!--                android:maxLines="2"-->
+<!--                android:text="Суп «Рамен» — это одно из самых популярных блюд в Японии. Очень сытное блюдо..."-->
+<!--                android:textSize="12sp" />-->
+<!--        </LinearLayout>-->
 
-        <!-- Recipe Card 2 -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="8dp">
+<!--        &lt;!&ndash; Recipe Card 2 &ndash;&gt;-->
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:padding="8dp">-->
 
-            <ImageView
-                android:id="@+id/recipeImage2"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:contentDescription="Recipe Image"
-                android:src="@drawable/souptomyam" />
+<!--            <ImageView-->
+<!--                android:id="@+id/recipeImage2"-->
+<!--                android:layout_width="50dp"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:contentDescription="Recipe Image"-->
+<!--                android:src="@drawable/souptomyam" />-->
 
-            <TextView
-                android:id="@+id/recipeText2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_weight="1"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:text="Суп Том-Ям — Варить этот тайский суп меня научила знакомая кореянка..."
-                android:textSize="12sp" />
-        </LinearLayout>
-    </LinearLayout>
+<!--            <TextView-->
+<!--                android:id="@+id/recipeText2"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="8dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:ellipsize="end"-->
+<!--                android:maxLines="2"-->
+<!--                android:text="Суп Том-Ям — Варить этот тайский суп меня научила знакомая кореянка..."-->
+<!--                android:textSize="12sp" />-->
+<!--        </LinearLayout>-->
+<!--    </LinearLayout>-->
 
 
     <!-- Bottom Navigation -->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/itemsList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="10dp"
+
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/button_layout"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/publishButton" />
+
     <LinearLayout
         android:id="@+id/button_layout"
         android:layout_width="match_parent"

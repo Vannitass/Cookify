@@ -162,7 +162,7 @@ class NewPostActivity : AppCompatActivity() {
     private fun getFileFromUri(uri: Uri): File? {
         return try {
             val inputStream = contentResolver.openInputStream(uri) ?: return null
-            val tempFile = File.createTempFile("upload", null, cacheDir)
+            val tempFile = File.createTempFile("upload", ".jpeg", cacheDir)
             tempFile.outputStream().use { inputStream.copyTo(it) }
             tempFile
         } catch (e: Exception) {

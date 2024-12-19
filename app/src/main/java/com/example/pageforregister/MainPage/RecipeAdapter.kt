@@ -1,9 +1,11 @@
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.pageforregister.MainPage.Card
 import com.example.pageforregister.MainPage.Recipe
 import com.example.pageforregister.R
 import com.squareup.picasso.Picasso
@@ -35,8 +37,23 @@ class RecipeAdapter(private val recipes: MutableList<Recipe>) : RecyclerView.Ada
 //            //.error(R.drawable.error_image) // Изображение при ошибке загрузки
 //            .into(holder.image)
 
-        // Загрузка изображения с помощью Picasso  вариант 2
+//        // Загрузка изображения с помощью Picasso  вариант 2
         Picasso.get().load(recipe.image_path).into(holder.image)
+
+        holder.itemView.setOnClickListener {
+            val context = holder.itemView.context
+            val intent = Intent(context, Card::class.java)
+
+            intent.putExtra("title", recipe.title)
+            intent.putExtra("description", recipe.description)
+            intent.putExtra("author", recipe.author)
+            intent.putExtra("imagePath", recipe.image_path)
+
+            context.startActivity(intent)
+        }
+
+
+        //Picasso.get().load("https://i.imgur.com/1x9VolV.jpeg").into(holder.image)
     }
 
     override fun getItemCount(): Int = recipes.size
