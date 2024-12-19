@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.pageforregister.MainPage.Card
 import com.example.pageforregister.MainPage.MainPageActivity
 import com.example.pageforregister.chat.Chat
 import com.example.pageforregister.MainPage.MainPageActivity.Companion.NEW_POST_REQUEST_CODE
@@ -88,6 +89,8 @@ class Profile : AppCompatActivity() {
 
         // Загрузка рецептов с сервера
         fetchRecipes()
+        Card.set_page_before(2)
+
     }
 
     private fun fetchRecipes() {

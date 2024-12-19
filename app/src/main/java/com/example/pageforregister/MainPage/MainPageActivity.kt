@@ -96,6 +96,7 @@ class MainPageActivity : AppCompatActivity() {
 
         // Загрузка рецептов с сервера
         fetchRecipes()
+        Card.set_page_before(1)
 
         Picasso.Builder(applicationContext).loggingEnabled(true).build();
 

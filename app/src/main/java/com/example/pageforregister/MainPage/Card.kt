@@ -8,12 +8,20 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.pageforregister.Profile.Profile
 import com.example.pageforregister.R
 import com.squareup.picasso.Picasso
 
 @Suppress("DEPRECATION")
 class Card : AppCompatActivity() {
 
+    companion object {
+        var inpage_before: Int = 1
+        fun set_page_before(inpage_before: Int) {
+            this.inpage_before = inpage_before
+        }
+
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.card)
@@ -46,7 +54,10 @@ class Card : AppCompatActivity() {
 
         // Переход на главную страницу
         buttonBack.setOnClickListener {
-            startActivity(Intent(this, MainPageActivity::class.java))
+            if(Card.inpage_before == 1){
+                startActivity(Intent(this, MainPageActivity::class.java))}
+            if(Card.inpage_before == 2){
+                startActivity(Intent(this, Profile::class.java))}
             // Указываем входящую и исходящую анимации
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
