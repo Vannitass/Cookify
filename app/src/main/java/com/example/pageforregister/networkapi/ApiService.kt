@@ -1,6 +1,5 @@
 package com.example.pageforregister.networkapi
 
-import com.example.pageforregister.MainPage.Item
 import com.example.pageforregister.MainPage.Recipe
 import com.example.pageforregister.MainPage.RecipeResponse
 import okhttp3.MultipartBody
@@ -33,5 +32,5 @@ interface ApiService {
         @Part("ingredients") ingredients: RequestBody
     ): Call<ResponseBody>
     @GET("get_recipes")
-    fun getRecipes(): Call<RecipeResponse>  // это по 3 методу
+    fun getRecipes(): Call<RecipeResponse>
 }

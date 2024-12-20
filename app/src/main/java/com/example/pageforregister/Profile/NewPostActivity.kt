@@ -138,8 +138,8 @@ class NewPostActivity : AppCompatActivity() {
         val descriptionPart = RequestBody.create("text/plain".toMediaTypeOrNull(), description)
         val authorPart = RequestBody.create("text/plain".toMediaTypeOrNull(), author.toString())
         val timeCookPart = RequestBody.create("text/plain".toMediaTypeOrNull(), dishTime)
-        val countPortionsPart = RequestBody.create("text/plain".toMediaTypeOrNull(), dishServings)
-        val ingredientsPart = RequestBody.create("text/plain".toMediaTypeOrNull(), dishIngredients)
+        val countPortionsPart = RequestBody.create("text/plain".toMediaTypeOrNull(), dishServings.toString())
+        val ingredientsPart = RequestBody.create("text/plain".toMediaTypeOrNull(), dishIngredients.toString())
 
 // Вызов API
         // Выполняем запрос на сервер

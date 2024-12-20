@@ -59,8 +59,8 @@ class Card : AppCompatActivity() {
         authorTextView.text = "Автор: $author"
 
         timeCookView.text = "$timeCook (мин)"
-        countPortionsView.text = "$countPortions."
-        ingredientsView.text = "$ingredients."
+        countPortionsView.text = countPortions
+        ingredientsView.text = ingredients
 
 
         // Переход на главную страницу
