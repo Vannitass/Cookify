@@ -38,7 +38,9 @@ class NewPostActivity : AppCompatActivity() {
     private lateinit var imagePreview: ImageView
     private lateinit var titleEditText: EditText
     private lateinit var descriptionEditText: EditText
-    private lateinit var contentEditText: EditText
+    private lateinit var dishTimeEditText: EditText
+    private lateinit var dishServingsEditText: EditText
+    private lateinit var dishIngredientsEditText: EditText
     private lateinit var uploadButton: Button
     private lateinit var chooseImageButton: Button
     private var selectedImageUri: Uri? = null
@@ -55,7 +57,11 @@ class NewPostActivity : AppCompatActivity() {
         imagePreview = findViewById(R.id.image_preview)
         titleEditText = findViewById(R.id.edit_dish_name)
         descriptionEditText = findViewById(R.id.edit_dish_description)
-        //contentEditText = findViewById(R.id.edit_dish_content)
+
+        dishTimeEditText = findViewById(R.id.edit_dish_time)
+        dishServingsEditText = findViewById(R.id.edit_dish_servings)
+        dishIngredientsEditText = findViewById(R.id.edit_dish_ingredients)
+
         uploadButton = findViewById(R.id.btn_publish)
         chooseImageButton = findViewById(R.id.btn_choose_photo)
         val intentAnim = Intent(this, MainPageActivity::class.java)
@@ -104,9 +110,12 @@ class NewPostActivity : AppCompatActivity() {
     private fun uploadRecipe() {
         val title = titleEditText.text.toString()
         val description = descriptionEditText.text.toString()
+        val dishTime = dishTimeEditText.text.toString()
+        val dishServings = dishServingsEditText.text.toString()
+        val dishIngredients = dishIngredientsEditText.text.toString()
 
         // Проверка на заполненность полей
-        if (title.isEmpty() || description.isEmpty() || selectedImageUri == null) {
+        if (title.isEmpty() || description.isEmpty() || dishTime.isEmpty() || dishServings.isEmpty() || dishIngredients.isEmpty() || selectedImageUri == null) {
             Toast.makeText(this, "Заполните все поля", Toast.LENGTH_SHORT).show()
             return
         }
@@ -122,32 +131,21 @@ class NewPostActivity : AppCompatActivity() {
             return
         }
 
-//        val file = File(selectedImageUri!!.path!!)
-//        val requestFile = file.asRequestBody("image/*".toMediaTypeOrNull())
-//        val body = MultipartBody.Part.createFormData("image", file.name, requestFile)
-//
-//// Создание частей запроса
-//        val titlePart = RequestBody.create("text/plain".toMediaTypeOrNull(), title)
-//        val descriptionPart = RequestBody.create("text/plain".toMediaTypeOrNull(), description)
-//        //val contentPart = RequestBody.create("text/plain".toMediaTypeOrNull(), content)
-//        val authorPart = RequestBody.create("text/plain".toMediaTypeOrNull(), author.toString()) // Добавляем "author"
-
         // Создаём части для запроса
         val requestFile = imageFile.asRequestBody("image/*".toMediaTypeOrNull())
         val body = MultipartBody.Part.createFormData("image", imageFile.name, requestFile)
         val titlePart = RequestBody.create("text/plain".toMediaTypeOrNull(), title)
         val descriptionPart = RequestBody.create("text/plain".toMediaTypeOrNull(), description)
         val authorPart = RequestBody.create("text/plain".toMediaTypeOrNull(), author.toString())
-
-
-
-
+        val timeCookPart = RequestBody.create("text/plain".toMediaTypeOrNull(), dishTime)
+        val countPortionsPart = RequestBody.create("text/plain".toMediaTypeOrNull(), dishServings)
+        val ingredientsPart = RequestBody.create("text/plain".toMediaTypeOrNull(), dishIngredients)
 
 // Вызов API
         // Выполняем запрос на сервер
         GlobalScope.launch(Dispatchers.IO) { //конструкция которая позволяет делать запрос к бд в фоновом потоке не мешая основному отресовывать
             try {
-                RetrofitInstance.api.uploadRecipe(titlePart, descriptionPart, authorPart, body)
+                RetrofitInstance.api.uploadRecipe(titlePart, descriptionPart, authorPart, body, timeCookPart, countPortionsPart, ingredientsPart)
                     .enqueue(object : Callback<ResponseBody> {
                         override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                             if (response.isSuccessful) {

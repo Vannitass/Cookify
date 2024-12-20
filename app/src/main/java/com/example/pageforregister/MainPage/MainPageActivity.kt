@@ -4,10 +4,8 @@ import RecipeAdapter
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.widget.EditText
-import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageButton
@@ -29,9 +27,6 @@ class MainPageActivity : AppCompatActivity() {
 
     private lateinit var recipeAdapter: RecipeAdapter
     private lateinit var recyclerView: RecyclerView
-    private lateinit var search: EditText
-    private lateinit var handler: Handler
-    private lateinit var runnable: Runnable
 
     @SuppressLint("WrongViewCast")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,9 +40,6 @@ class MainPageActivity : AppCompatActivity() {
         val imageButton3 = findViewById<AppCompatImageButton>(R.id.button3)
 
         val search: EditText = findViewById(R.id.search)
-
-
-
 
         imageButton1.setOnClickListener {
             val intent = Intent(this, MainPageActivity::class.java)
@@ -84,7 +76,7 @@ class MainPageActivity : AppCompatActivity() {
 
         }
 
-
+        val answer_search = search.text.toString()
 
 
         // Инициализация RecyclerView
@@ -94,41 +86,17 @@ class MainPageActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
 
+        // Загрузка рецептов с сервера
+        fetchRecipes()
+        Card.set_page_before(1)
 
-        val searchButton: ImageButton = findViewById(R.id.search_button)
-        searchButton.setOnClickListener {
-            val query = search.text.toString().trim()
-            if (query.isNotEmpty()) {
-                fetchRecipes(query) // Передаем текст запроса в метод загрузки рецептов
-            } else {
-                Toast.makeText(this, "Введите текст для поиска", Toast.LENGTH_SHORT).show()
-            }
-        }
+        Picasso.Builder(applicationContext).loggingEnabled(true).build();
 
-
-
-        handler = Handler(mainLooper) // Создаем handler для выполнения задач в основном потоке
-        runnable = object : Runnable {
-            override fun run() {
-                val query = search.text.toString().trim()
-
-                // Если поле ввода пустое, отправляем пустой запрос
-                if (query.isEmpty()) {
-                    fetchRecipes("") // Пустой запрос
-                }
-
-                // Повторяем задачу через 2 секунды
-                handler.postDelayed(this, 10000)
-            }
-        }
-
-        // Запускаем периодический запрос
-        handler.post(runnable)
     }
 
-    private fun fetchRecipes(query:String) {
+    private fun fetchRecipes() {
         // метод выгрузки из базы данных
-        RetrofitInstance.api.getRecipes(query).enqueue(object : Callback<RecipeResponse> {
+        RetrofitInstance.api.getRecipes().enqueue(object : Callback<RecipeResponse> {
             override fun onResponse(call: Call<RecipeResponse>, response: Response<RecipeResponse>) {
                 if (response.isSuccessful) {
                     val recipeResponse = response.body()

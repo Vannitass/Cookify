@@ -9,14 +9,17 @@ import com.example.pageforregister.MainPage.Card
 import com.example.pageforregister.MainPage.Recipe
 import com.example.pageforregister.R
 import com.squareup.picasso.Picasso
+import org.w3c.dom.Text
 
 class RecipeAdapter(private val recipes: MutableList<Recipe>) : RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
 
     inner class RecipeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val title: TextView = itemView.findViewById(R.id.cardTitle) // Используем id из item_in_list.xml
+        val title: TextView =
+            itemView.findViewById(R.id.cardTitle) // Используем id из item_in_list.xml
         val description: TextView = itemView.findViewById(R.id.cardDescription) // id для описания
         val author: TextView = itemView.findViewById(R.id.userNickname) // id для автора
         val image: ImageView = itemView.findViewById(R.id.cardImage) // id для изображения
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
@@ -31,6 +34,8 @@ class RecipeAdapter(private val recipes: MutableList<Recipe>) : RecyclerView.Ada
         holder.author.text = recipe.author
 
 
+
+
         Picasso.get()
             .load(recipe.image_path) // Используем полный URL из поля image_path
             .into(holder.image)
@@ -43,6 +48,9 @@ class RecipeAdapter(private val recipes: MutableList<Recipe>) : RecyclerView.Ada
             intent.putExtra("description", recipe.description)
             intent.putExtra("author", recipe.author)
             intent.putExtra("imagePath", recipe.image_path)
+            intent.putExtra("timeCook", recipe.timeCook)
+            intent.putExtra("countPortions", recipe.countPortions)
+            intent.putExtra("ingredients", recipe.ingredients)
 
             context.startActivity(intent)
         }

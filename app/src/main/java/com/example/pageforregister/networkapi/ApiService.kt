@@ -27,10 +27,11 @@ interface ApiService {
         @Part("title") title: RequestBody,
         @Part("description") description: RequestBody,
         @Part("author") author: RequestBody,
-        @Part image: MultipartBody.Part
+        @Part image: MultipartBody.Part,
+        @Part("timeCook") timeCook: RequestBody,
+        @Part("countPortions") countPortions: RequestBody,
+        @Part("ingredients") ingredients: RequestBody
     ): Call<ResponseBody>
     @GET("get_recipes")
-//    fun getRecipes(): Call<List<RecipeResponse>>  // это по 2 методу выгрузки
-    fun getRecipes(@Query("query") query: String): Call<RecipeResponse>  // это по 3 методу
-
+    fun getRecipes(): Call<RecipeResponse>  // это по 3 методу
 }

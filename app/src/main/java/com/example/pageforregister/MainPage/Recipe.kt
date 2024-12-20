@@ -5,5 +5,8 @@ data class Recipe(
     val title: String,
     val description: String,
     val image_path: String,
-    val author: String
+    val author: String,
+    val timeCook: String,
+    val countPortions: String,
+    val ingredients: String
 )

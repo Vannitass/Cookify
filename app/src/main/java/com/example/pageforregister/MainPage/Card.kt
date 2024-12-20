@@ -22,6 +22,7 @@ class Card : AppCompatActivity() {
         }
 
     }
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.card)
@@ -31,13 +32,18 @@ class Card : AppCompatActivity() {
         val description = intent.getStringExtra("description")
         val author = intent.getStringExtra("author")
         val imagePath = intent.getStringExtra("imagePath")
+        val timeCook = intent.getStringExtra("timeCook")
+        val countPortions = intent.getStringExtra("countPortions")
+        val ingredients = intent.getStringExtra("ingredients")
 
         // Инициализация элементов представления
         val titleTextView = findViewById<TextView>(R.id.recipeTitle)
         val descriptionTextView = findViewById<TextView>(R.id.cardDescription)
         val authorTextView = findViewById<TextView>(R.id.profileName)
         val imageView = findViewById<ImageView>(R.id.imageView)
-
+        val timeCookView = findViewById<TextView>(R.id.cardTime)
+        val countPortionsView = findViewById<TextView>(R.id.cardCount)
+        val ingredientsView = findViewById<TextView>(R.id.cardIngridients)
 
         // Инициализация кнопок навигации между экранами
         val buttonBack: ImageButton = this.findViewById(R.id.backButton)
@@ -51,6 +57,11 @@ class Card : AppCompatActivity() {
         titleTextView.text = title
         descriptionTextView.text = description
         authorTextView.text = "Автор: $author"
+
+        timeCookView.text = "$timeCook (мин)"
+        countPortionsView.text = "$countPortions."
+        ingredientsView.text = "$ingredients."
+
 
         // Переход на главную страницу
         buttonBack.setOnClickListener {
