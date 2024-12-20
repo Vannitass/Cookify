@@ -65,9 +65,6 @@ class Card : AppCompatActivity() {
         // Используем Picasso для загрузки изображения
         if (imagePath != null) {
             Picasso.get().load(Uri.parse(imagePath)).into(imageView)
-        } else {
-            imageView.setImageResource(R.drawable.placeholder_image) // Добавьте изображение-заглушку
         }
     }
 }
-

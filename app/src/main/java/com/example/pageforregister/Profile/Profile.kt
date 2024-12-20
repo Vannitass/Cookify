@@ -88,14 +88,14 @@ class Profile : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         // Загрузка рецептов с сервера
-        fetchRecipes()
+        fetchRecipes("")
         Card.set_page_before(2)
 
     }
 
-    private fun fetchRecipes() {
+    private fun fetchRecipes(query:String) {
         // метод выгрузки из базы данных
-        RetrofitInstance.api.getRecipes().enqueue(object : Callback<RecipeResponse> {
+        RetrofitInstance.api.getRecipes(query).enqueue(object : Callback<RecipeResponse> {
             override fun onResponse(call: Call<RecipeResponse>, response: Response<RecipeResponse>) {
                 if (response.isSuccessful) {
                     val recipeResponse = response.body()

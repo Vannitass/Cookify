@@ -33,7 +33,6 @@ class RecipeAdapter(private val recipes: MutableList<Recipe>) : RecyclerView.Ada
 
         Picasso.get()
             .load(recipe.image_path) // Используем полный URL из поля image_path
-            .placeholder(R.drawable.placeholder_image) // Плейсхолдер во время загрузки
             .into(holder.image)
 
         holder.itemView.setOnClickListener {

@@ -31,5 +31,6 @@ interface ApiService {
     ): Call<ResponseBody>
     @GET("get_recipes")
 //    fun getRecipes(): Call<List<RecipeResponse>>  // это по 2 методу выгрузки
-    fun getRecipes(): Call<RecipeResponse>  // это по 3 методу
+    fun getRecipes(@Query("query") query: String): Call<RecipeResponse>  // это по 3 методу
+
 }
